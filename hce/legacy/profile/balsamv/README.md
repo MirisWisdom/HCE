@@ -9,7 +9,7 @@
         HCE Profile Binary Editor
     </h3>
     <p align="center">
-        <img src="https://user-images.githubusercontent.com/10241434/48844226-2be3d000-edd4-11e8-85c8-5edde1a98b3b.png">
+        <img src="https://user-images.githubusercontent.com/10241434/48846120-39e81f80-edd9-11e8-930a-f91f1b62689a.png">
     <p>
     <p align="center">
         <a href="https://github.com/yumiris/HCE.BalsamV/releases/latest">
@@ -33,7 +33,7 @@ This project is currently a work progress. At the moment, all values can be edit
 
 # Usage
 
-1. Download & run the executable.
+1. [Download](https://github.com/yumiris/HCE.BalsamV/releases/latest) & run the executable.
 2. If a HCE profile exists, it will automatically be loaded. If not, please click on `Load` and select your `blam.sav`^.
 3. Edit the values accordingly, then click `Save`.
 
