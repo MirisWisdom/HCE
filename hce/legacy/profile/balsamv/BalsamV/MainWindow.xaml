@@ -15,344 +15,352 @@
     <Window.DataContext>
         <local:Main />
     </Window.DataContext>
-    <Grid Margin="5">
-        <Grid.Resources>
-            <Style TargetType="{x:Type DockPanel}">
-                <Setter Property="Margin" Value="0,1,0,0" />
-            </Style>
-            <Style TargetType="{x:Type CheckBox}">
-                <Setter Property="Margin" Value="-1,1,0,1" />
-                <Setter Property="Background" Value="#FFF4F4F4" />
-                <Setter Property="BorderBrush" Value="#ABADB3" />
-            </Style>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="#FFF4F4F4" />
-                <Setter Property="BorderBrush" Value="#ABADB3" />
-            </Style>
-            <Style TargetType="{x:Type Label}">
-                <Setter Property="Width" Value="75" />
-                <Setter Property="Padding" Value="0 5" />
-            </Style>
-            <Style TargetType="{x:Type TextBox}">
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Setter Property="Background" Value="#FFF4F4F4" />
-            </Style>
-        </Grid.Resources>
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="About" Click="About" />
+            <MenuItem Header="Releases" Click="Releases" />
+        </Menu>
+        <Grid Margin="5">
+            <Grid.Resources>
+                <Style TargetType="{x:Type DockPanel}">
+                    <Setter Property="Margin" Value="0,1,0,0" />
+                </Style>
+                <Style TargetType="{x:Type CheckBox}">
+                    <Setter Property="Margin" Value="-1,1,0,1" />
+                    <Setter Property="Background" Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush" Value="#ABADB3" />
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFF4F4F4" />
+                    <Setter Property="BorderBrush" Value="#ABADB3" />
+                </Style>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Width" Value="75" />
+                    <Setter Property="Padding" Value="0 5" />
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="#FFF4F4F4" />
+                </Style>
+            </Grid.Resources>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0">
-            <Image DockPanel.Dock="Top"
-                   Source="icon.ico"
-                   Stretch="None"
-                   HorizontalAlignment="Center"
-                   RenderOptions.BitmapScalingMode="NearestNeighbor" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <!-- Player Information -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Player Information"
-                      IsEnabled="{Binding CanEdit}">
-                <DockPanel>
 
-                    <!-- Name -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Name:" />
-                        <TextBox Text="{Binding Configuration.Name.Value}" />
+            <DockPanel Grid.Column="0">
+                <Image DockPanel.Dock="Top"
+                       Source="icon.ico"
+                       Stretch="None"
+                       HorizontalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="NearestNeighbor" />
+
+                <!-- Player Information -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Player Information"
+                          IsEnabled="{Binding CanEdit}">
+                    <DockPanel>
+
+                        <!-- Name -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Name:" />
+                            <TextBox Text="{Binding Configuration.Name.Value}" />
+                        </DockPanel>
+
+                        <!-- Colour -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Colour:" />
+                            <ComboBox x:Name="ColourComboBox"
+                                      SelectedItem="{Binding Configuration.Colour.Value}" />
+                        </DockPanel>
                     </DockPanel>
+                </GroupBox>
 
-                    <!-- Colour -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Colour:" />
-                        <ComboBox x:Name="ColourComboBox"
-                                  SelectedItem="{Binding Configuration.Colour.Value}" />
+                <!-- Mouse Settings -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Mouse Settings"
+                          IsEnabled="{Binding CanEdit}">
+                    <DockPanel>
+
+                        <!-- Sensitivity -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Sensitivity:"
+                                   VerticalAlignment="Center" />
+
+                            <StackPanel>
+
+                                <!-- Horizontal -->
+                                <DockPanel>
+                                    <Label Content="Horizontal:"
+                                           HorizontalAlignment="Left" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             Width="25"
+                                             IsReadOnly="True"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding ElementName=SensitivityHorizontalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Slider Minimum="1"
+                                            IsSnapToTickEnabled="True"
+                                            VerticalAlignment="Center"
+                                            x:Name="SensitivityHorizontalSlider"
+                                            Value="{Binding Configuration.Mouse.Sensitivity.Horizontal}" />
+                                </DockPanel>
+
+                                <!-- Vertical -->
+                                <DockPanel>
+                                    <Label Content="Vertical:"
+                                           HorizontalAlignment="Left" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             Width="25"
+                                             IsReadOnly="True"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding ElementName=SensitivityVerticalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Slider Minimum="1"
+                                            IsSnapToTickEnabled="True"
+                                            VerticalAlignment="Center"
+                                            x:Name="SensitivityVerticalSlider"
+                                            Value="{Binding Configuration.Mouse.Sensitivity.Vertical}" />
+                                </DockPanel>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <!-- Vertical Axis -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Vertical Axis:" />
+
+                            <!-- Invert -->
+                            <CheckBox Content="Invert"
+                                      VerticalAlignment="Center"
+                                      IsChecked="{Binding Configuration.Mouse.InvertVerticalAxis}" />
+                        </DockPanel>
                     </DockPanel>
-                </DockPanel>
-            </GroupBox>
+                </GroupBox>
 
-            <!-- Mouse Settings -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Mouse Settings"
-                      IsEnabled="{Binding CanEdit}">
-                <DockPanel>
 
-                    <!-- Sensitivity -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Sensitivity:"
-                               VerticalAlignment="Center" />
+                <!-- Network Settings -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Network Settings"
+                          IsEnabled="{Binding CanEdit}">
+                    <DockPanel>
 
-                        <StackPanel>
+                        <!-- Connection -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Connection:" />
+                            <ComboBox x:Name="ConnectionComboBox"
+                                      SelectedItem="{Binding Configuration.Network.Connection.Value}" />
+                        </DockPanel>
 
-                            <!-- Horizontal -->
-                            <DockPanel>
-                                <Label Content="Horizontal:"
-                                       HorizontalAlignment="Left" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding ElementName=SensitivityHorizontalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-                                <Slider Minimum="1"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center"
-                                        x:Name="SensitivityHorizontalSlider"
-                                        Value="{Binding Configuration.Mouse.Sensitivity.Horizontal}" />
-                            </DockPanel>
+                        <!-- Ports -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="UDP Ports:"
+                                   VerticalAlignment="Center" />
+                            <StackPanel>
 
-                            <!-- Vertical -->
-                            <DockPanel>
-                                <Label Content="Vertical:"
-                                       HorizontalAlignment="Left" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding ElementName=SensitivityVerticalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-                                <Slider Minimum="1"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center"
-                                        x:Name="SensitivityVerticalSlider"
-                                        Value="{Binding Configuration.Mouse.Sensitivity.Vertical}" />
-                            </DockPanel>
-                        </StackPanel>
+                                <!-- Server -->
+                                <DockPanel>
+                                    <Label Content="Server:" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding Configuration.Network.Port.Server}" />
+                                </DockPanel>
+
+                                <!-- Client -->
+                                <DockPanel>
+                                    <Label Content="Client:" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding Configuration.Network.Port.Client}" />
+                                </DockPanel>
+                            </StackPanel>
+                        </DockPanel>
                     </DockPanel>
+                </GroupBox>
+            </DockPanel>
 
-                    <!-- Vertical Axis -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Vertical Axis:" />
+            <DockPanel Grid.Column="1">
+                <!-- Video Settings -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Video Settings"
+                          IsEnabled="{Binding CanEdit}">
+                    <DockPanel>
 
-                        <!-- Invert -->
-                        <CheckBox Content="Invert"
-                                  VerticalAlignment="Center"
-                                  IsChecked="{Binding Configuration.Mouse.InvertVerticalAxis}" />
+                        <!-- Resolution -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Resolution:"
+                                   VerticalAlignment="Center" />
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="25" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Width -->
+                                    <TextBox Grid.Column="0"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding Configuration.Video.Resolution.Width}" />
+
+                                    <!-- Separator -->
+                                    <Label Grid.Column="1"
+                                           Content="x"
+                                           HorizontalContentAlignment="Center"
+                                           HorizontalAlignment="Center" />
+
+                                    <!-- Height -->
+                                    <TextBox Grid.Column="2"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding Configuration.Video.Resolution.Height}" />
+                                </Grid>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <!-- Frame Rate -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Frame Rate:" />
+                            <ComboBox x:Name="FrameRateComboBox"
+                                      SelectedItem="{Binding Configuration.Video.FrameRate.Value}" />
+                        </DockPanel>
+
+                        <!-- GFX Effects -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label VerticalAlignment="Center"
+                                   Content="GFX Effects:" />
+                            <StackPanel>
+                                <!-- Specular -->
+                                <CheckBox Content="Specular"
+                                          IsChecked="{Binding Configuration.Video.Effects.Specular}" />
+
+                                <!-- Shadows -->
+                                <CheckBox Content="Shadows"
+                                          IsChecked="{Binding Configuration.Video.Effects.Shadows}" />
+
+                                <!-- Decals -->
+                                <CheckBox Content="Decals"
+                                          IsChecked="{Binding Configuration.Video.Effects.Decals}" />
+                            </StackPanel>
+                        </DockPanel>
+
+
+                        <!-- Texture Quality Level -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Textures:" />
+                            <ComboBox x:Name="TextureQualityComboBox"
+                                      SelectedItem="{Binding Configuration.Video.Quality.Value}" />
+                        </DockPanel>
+
+                        <!-- Particles Quality Level -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Particles:" />
+                            <ComboBox x:Name="ParticlesComboBox"
+                                      SelectedItem="{Binding Configuration.Video.Particles.Value}" />
+                        </DockPanel>
                     </DockPanel>
-                </DockPanel>
-            </GroupBox>
+                </GroupBox>
 
 
-            <!-- Network Settings -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Network Settings"
-                      IsEnabled="{Binding CanEdit}">
-                <DockPanel>
+                <!-- Audio Settings -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Audio Settings"
+                          IsEnabled="{Binding CanEdit}">
+                    <DockPanel>
 
-                    <!-- Connection -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Connection:" />
-                        <ComboBox x:Name="ConnectionComboBox"
-                                  SelectedItem="{Binding Configuration.Network.Connection.Value}" />
+                        <!-- Volumes -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Volumes:"
+                                   VerticalAlignment="Center" />
+
+                            <!-- Master  -->
+                            <StackPanel>
+                                <DockPanel>
+                                    <Label Content="Master:" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             Width="25"
+                                             IsReadOnly="True"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding ElementName=VolumeMasterSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Slider Minimum="0"
+                                            IsSnapToTickEnabled="True"
+                                            VerticalAlignment="Center"
+                                            x:Name="VolumeMasterSlider"
+                                            Value="{Binding Configuration.Audio.Volume.Master}" />
+                                </DockPanel>
+
+                                <!-- Effects -->
+                                <DockPanel>
+                                    <Label Content="Effects:" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             Width="25"
+                                             IsReadOnly="True"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding ElementName=VolumeEffectsSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Slider Minimum="0"
+                                            IsSnapToTickEnabled="True"
+                                            VerticalAlignment="Center"
+                                            x:Name="VolumeEffectsSlider"
+                                            Value="{Binding Configuration.Audio.Volume.Effects}" />
+                                </DockPanel>
+
+                                <!-- Music -->
+                                <DockPanel>
+                                    <Label Content="Music:" />
+                                    <TextBox DockPanel.Dock="Right"
+                                             Width="25"
+                                             IsReadOnly="True"
+                                             HorizontalContentAlignment="Center"
+                                             Text="{Binding ElementName=VolumeMusicSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Slider Minimum="0"
+                                            IsSnapToTickEnabled="True"
+                                            VerticalAlignment="Center"
+                                            x:Name="VolumeMusicSlider"
+                                            Value="{Binding Configuration.Audio.Volume.Music}" />
+                                </DockPanel>
+                            </StackPanel>
+                        </DockPanel>
+
+                        <!-- Quality -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Quality:" />
+                            <ComboBox x:Name="AudioQualityComboBox"
+                                      SelectedItem="{Binding Configuration.Audio.Quality.Value}" />
+                        </DockPanel>
+
+                        <!-- Variety -->
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Variety:" />
+                            <ComboBox x:Name="VarietyComboBox"
+                                      SelectedItem="{Binding Configuration.Audio.Variety.Value}" />
+                        </DockPanel>
                     </DockPanel>
+                </GroupBox>
 
-                    <!-- Ports -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="UDP Ports:"
-                               VerticalAlignment="Center" />
-                        <StackPanel>
+                <!-- Operations -->
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Operations:"
+                          VerticalAlignment="Stretch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                            <!-- Server -->
-                            <DockPanel>
-                                <Label Content="Server:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding Configuration.Network.Port.Server}" />
-                            </DockPanel>
+                        <!-- Load -->
+                        <Button Grid.Column="0"
+                                Content="Load"
+                                VerticalAlignment="Stretch"
+                                Margin="0,0,1,0"
+                                Click="Load" />
 
-                            <!-- Client -->
-                            <DockPanel>
-                                <Label Content="Client:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding Configuration.Network.Port.Client}" />
-                            </DockPanel>
-                        </StackPanel>
-                    </DockPanel>
-                </DockPanel>
-            </GroupBox>
-        </DockPanel>
-
-        <DockPanel Grid.Column="1">
-            <!-- Video Settings -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Video Settings"
-                      IsEnabled="{Binding CanEdit}">
-                <DockPanel>
-
-                    <!-- Resolution -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Resolution:"
-                               VerticalAlignment="Center" />
-                        <StackPanel>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="25" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Width -->
-                                <TextBox Grid.Column="0"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding Configuration.Video.Resolution.Width}" />
-
-                                <!-- Separator -->
-                                <Label Grid.Column="1"
-                                       Content="x"
-                                       HorizontalContentAlignment="Center"
-                                       HorizontalAlignment="Center" />
-
-                                <!-- Height -->
-                                <TextBox Grid.Column="2"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding Configuration.Video.Resolution.Height}" />
-                            </Grid>
-                        </StackPanel>
-                    </DockPanel>
-
-                    <!-- Frame Rate -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Frame Rate:" />
-                        <ComboBox x:Name="FrameRateComboBox"
-                                  SelectedItem="{Binding Configuration.Video.FrameRate.Value}" />
-                    </DockPanel>
-
-                    <!-- GFX Effects -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label VerticalAlignment="Center"
-                               Content="GFX Effects:" />
-                        <StackPanel>
-                            <!-- Specular -->
-                            <CheckBox Content="Specular"
-                                      IsChecked="{Binding Configuration.Video.Effects.Specular}" />
-
-                            <!-- Shadows -->
-                            <CheckBox Content="Shadows"
-                                      IsChecked="{Binding Configuration.Video.Effects.Shadows}" />
-
-                            <!-- Decals -->
-                            <CheckBox Content="Decals"
-                                      IsChecked="{Binding Configuration.Video.Effects.Decals}" />
-                        </StackPanel>
-                    </DockPanel>
-
-
-                    <!-- Texture Quality Level -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Textures:" />
-                        <ComboBox x:Name="TextureQualityComboBox"
-                                  SelectedItem="{Binding Configuration.Video.Quality.Value}" />
-                    </DockPanel>
-
-                    <!-- Particles Quality Level -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Particles:" />
-                        <ComboBox x:Name="ParticlesComboBox"
-                                  SelectedItem="{Binding Configuration.Video.Particles.Value}" />
-                    </DockPanel>
-                </DockPanel>
-            </GroupBox>
-
-
-            <!-- Audio Settings -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Audio Settings"
-                      IsEnabled="{Binding CanEdit}">
-                <DockPanel>
-
-                    <!-- Volumes -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Volumes:"
-                               VerticalAlignment="Center" />
-
-                        <!-- Master  -->
-                        <StackPanel>
-                            <DockPanel>
-                                <Label Content="Master:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding ElementName=VolumeMasterSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-                                <Slider Minimum="0"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center"
-                                        x:Name="VolumeMasterSlider"
-                                        Value="{Binding Configuration.Audio.Volume.Master}" />
-                            </DockPanel>
-
-                            <!-- Effects -->
-                            <DockPanel>
-                                <Label Content="Effects:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding ElementName=VolumeEffectsSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-                                <Slider Minimum="0"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center"
-                                        x:Name="VolumeEffectsSlider"
-                                        Value="{Binding Configuration.Audio.Volume.Effects}" />
-                            </DockPanel>
-
-                            <!-- Music -->
-                            <DockPanel>
-                                <Label Content="Music:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center"
-                                         Text="{Binding ElementName=VolumeMusicSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-                                <Slider Minimum="0"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center"
-                                        x:Name="VolumeMusicSlider"
-                                        Value="{Binding Configuration.Audio.Volume.Music}" />
-                            </DockPanel>
-                        </StackPanel>
-                    </DockPanel>
-
-                    <!-- Quality -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Quality:" />
-                        <ComboBox x:Name="AudioQualityComboBox"
-                                  SelectedItem="{Binding Configuration.Audio.Quality.Value}" />
-                    </DockPanel>
-
-                    <!-- Variety -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Variety:" />
-                        <ComboBox x:Name="VarietyComboBox"
-                                  SelectedItem="{Binding Configuration.Audio.Variety.Value}" />
-                    </DockPanel>
-                </DockPanel>
-            </GroupBox>
-
-            <!-- Operations -->
-            <GroupBox DockPanel.Dock="Top"
-                      Header="Operations:"
-                      VerticalAlignment="Stretch">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Load -->
-                    <Button Grid.Column="0"
-                            Content="Load"
-                            VerticalAlignment="Stretch"
-                            Margin="0,0,1,0"
-                            Click="Load" />
-
-                    <!-- Save -->
-                    <Button Grid.Column="1"
-                            Content="Save"
-                            VerticalAlignment="Stretch"
-                            IsEnabled="{Binding CanEdit}"
-                            Margin="1,0,0,0" />
-                </Grid>
-            </GroupBox>
-        </DockPanel>
-    </Grid>
+                        <!-- Save -->
+                        <Button Grid.Column="1"
+                                Content="Save"
+                                VerticalAlignment="Stretch"
+                                IsEnabled="{Binding CanEdit}"
+                                Margin="1,0,0,0" />
+                    </Grid>
+                </GroupBox>
+            </DockPanel>
+        </Grid>
+    </StackPanel>
 </Window>

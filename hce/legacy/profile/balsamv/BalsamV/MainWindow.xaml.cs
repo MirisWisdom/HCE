@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Atarashii.Modules.Profile.Options;
@@ -48,6 +49,16 @@ namespace BalsamV
 
             if (dialog.ShowDialog() == true)
                 _main.Path = dialog.FileName;
+        }
+
+        private void About(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/yumiris/HCE.BalsamV");
+        }
+
+        private void Releases(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/yumiris/HCE.BalsamV/releases");
         }
     }
 }
