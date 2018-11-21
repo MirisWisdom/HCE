@@ -42,6 +42,9 @@
                     <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Background" Value="#FFF4F4F4" />
                 </Style>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
             </Grid.Resources>
 
             <Grid.ColumnDefinitions>
