@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using Atarashii.API;
 using Atarashii.Modules.Profile;
 using BalsamV.Annotations;
 
@@ -14,9 +14,9 @@ namespace BalsamV
     public sealed class Main : INotifyPropertyChanged
     {
         /// <summary>
-        ///     Selected Blam.sav absolute path.
+        ///     Selected blam.sav exists.
         /// </summary>
-        private string _path;
+        private bool _canEdit;
 
         /// <summary>
         ///     Atarashii Profile Configuration for the selected blam.sav.
@@ -24,12 +24,12 @@ namespace BalsamV
         private Configuration _configuration;
 
         /// <summary>
-        ///     Selected blam.sav exists.
+        ///     Selected Blam.sav absolute path.
         /// </summary>
-        private bool _canEdit;
+        private string _path;
 
         /// <summary>
-        ///  <see cref="_path"/>
+        ///     <see cref="_path" />
         /// </summary>
         public string Path
         {
@@ -44,7 +44,7 @@ namespace BalsamV
         }
 
         /// <summary>
-        ///  <see cref="_configuration"/>
+        ///     <see cref="_configuration" />
         /// </summary>
         public Configuration Configuration
         {
@@ -58,7 +58,7 @@ namespace BalsamV
         }
 
         /// <summary>
-        ///  <see cref="_canEdit"/>
+        ///     <see cref="_canEdit" />
         /// </summary>
         public bool CanEdit
         {
@@ -71,6 +71,8 @@ namespace BalsamV
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         ///     Attempts to auto-detect & load a blam.sav on the file system.
         /// </summary>
@@ -79,7 +81,7 @@ namespace BalsamV
             try
             {
                 Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                    "My Games", "Halo CE", "savegames", Atarashii.API.Profile.Detect(), "blam.sav");
+                    "My Games", "Halo CE", "savegames", Profile.Detect(), "blam.sav");
             }
             catch (Exception)
             {
@@ -93,11 +95,9 @@ namespace BalsamV
         private void OnPathChanged()
         {
             if (!File.Exists(Path)) return;
-            Configuration = Atarashii.API.Profile.Parse(Path);
+            Configuration = Profile.Parse(Path);
             CanEdit = true;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

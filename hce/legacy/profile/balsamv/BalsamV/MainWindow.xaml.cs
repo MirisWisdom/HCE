@@ -7,7 +7,7 @@ using Microsoft.Win32;
 namespace BalsamV
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
@@ -45,7 +45,7 @@ namespace BalsamV
             {
                 Filter = "Profile Binary|blam.sav"
             };
-            
+
             if (dialog.ShowDialog() == true)
                 _main.Path = dialog.FileName;
         }
