@@ -117,65 +117,38 @@
                 </DockPanel>
             </GroupBox>
 
-            <!-- Audio Settings -->
+
+            <!-- Network Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Audio Settings">
+                      Header="Network Settings">
                 <DockPanel>
 
-                    <!-- Volumes -->
+                    <!-- Connection -->
                     <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Volumes:"
+                        <Label Content="Connection:" />
+                        <ComboBox />
+                    </DockPanel>
+
+                    <!-- Ports -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="UDP Ports:"
                                VerticalAlignment="Center" />
-
-                        <!-- Master  -->
                         <StackPanel>
+
+                            <!-- Server -->
                             <DockPanel>
-                                <Label Content="Master:" />
+                                <Label Content="Server:" />
                                 <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
                                          HorizontalContentAlignment="Center" />
-                                <Slider Minimum="1"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center" />
                             </DockPanel>
 
-                            <!-- Effects -->
+                            <!-- Client -->
                             <DockPanel>
-                                <Label Content="Effects:" />
+                                <Label Content="Client:" />
                                 <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
                                          HorizontalContentAlignment="Center" />
-                                <Slider Minimum="1"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center" />
-                            </DockPanel>
-
-                            <!-- Music -->
-                            <DockPanel>
-                                <Label Content="Music:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         Width="25"
-                                         IsReadOnly="True"
-                                         HorizontalContentAlignment="Center" />
-                                <Slider Minimum="1"
-                                        IsSnapToTickEnabled="True"
-                                        VerticalAlignment="Center" />
                             </DockPanel>
                         </StackPanel>
-                    </DockPanel>
-
-                    <!-- Quality -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Quality:" />
-                        <ComboBox />
-                    </DockPanel>
-
-                    <!-- Variety -->
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Variety:" />
-                        <ComboBox />
                     </DockPanel>
                 </DockPanel>
             </GroupBox>
@@ -253,37 +226,66 @@
                 </DockPanel>
             </GroupBox>
 
-            <!-- Network Settings -->
+
+            <!-- Audio Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Network Settings">
+                      Header="Audio Settings">
                 <DockPanel>
 
-                    <!-- Connection -->
+                    <!-- Volumes -->
                     <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Connection:" />
+                        <Label Content="Volumes:"
+                               VerticalAlignment="Center" />
+
+                        <!-- Master  -->
+                        <StackPanel>
+                            <DockPanel>
+                                <Label Content="Master:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Effects -->
+                            <DockPanel>
+                                <Label Content="Effects:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Music -->
+                            <DockPanel>
+                                <Label Content="Music:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Quality -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Quality:" />
                         <ComboBox />
                     </DockPanel>
 
-                    <!-- Ports -->
+                    <!-- Variety -->
                     <DockPanel DockPanel.Dock="Top">
-                        <Label Content="UDP Ports:"
-                               VerticalAlignment="Center" />
-                        <StackPanel>
-
-                            <!-- Server -->
-                            <DockPanel>
-                                <Label Content="Server:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         HorizontalContentAlignment="Center" />
-                            </DockPanel>
-
-                            <!-- Client -->
-                            <DockPanel>
-                                <Label Content="Client:" />
-                                <TextBox DockPanel.Dock="Right"
-                                         HorizontalContentAlignment="Center" />
-                            </DockPanel>
-                        </StackPanel>
+                        <Label Content="Variety:" />
+                        <ComboBox />
                     </DockPanel>
                 </DockPanel>
             </GroupBox>
