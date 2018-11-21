@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         SizeToContent="Height"
-        Background="#eaeaea">
+        Background="#eaeaea"
+        Icon="icon.ico">
     <Grid Margin="5">
         <Grid.Resources>
             <Style TargetType="{x:Type DockPanel}">
@@ -19,6 +20,11 @@
             <Style TargetType="{x:Type CheckBox}">
                 <Setter Property="Margin" Value="-1,1,0,1" />
                 <Setter Property="Background" Value="#FFF4F4F4" />
+                <Setter Property="BorderBrush" Value="#ABADB3" />
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#FFF4F4F4" />
+                <Setter Property="BorderBrush" Value="#ABADB3" />
             </Style>
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Width" Value="75" />
@@ -34,8 +40,12 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
         <DockPanel Grid.Column="0">
+            <Image DockPanel.Dock="Top"
+                   Source="icon.ico"
+                   Stretch="None"
+                   HorizontalAlignment="Center"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor" />
 
             <!-- Player Information -->
             <GroupBox DockPanel.Dock="Top"
@@ -291,12 +301,14 @@
                     <!-- Load -->
                     <Button Grid.Column="0"
                             Content="Load"
-                            VerticalAlignment="Stretch" />
+                            VerticalAlignment="Stretch"
+                            Margin="0,0,1,0" />
 
                     <!-- Save -->
                     <Button Grid.Column="1"
                             Content="Save"
-                            VerticalAlignment="Stretch" />
+                            VerticalAlignment="Stretch"
+                            Margin="1,0,0,0" />
                 </Grid>
             </GroupBox>
         </DockPanel>
