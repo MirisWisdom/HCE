@@ -8,14 +8,29 @@ using BalsamV.Annotations;
 
 namespace BalsamV
 {
-    public class Main : INotifyPropertyChanged
+    /// <summary>
+    ///     Main model for the HCE.BalsamV program.
+    /// </summary>
+    public sealed class Main : INotifyPropertyChanged
     {
+        /// <summary>
+        ///     Selected Blam.sav absolute path.
+        /// </summary>
         private string _path;
 
+        /// <summary>
+        ///     Atarashii Profile Configuration for the selected blam.sav.
+        /// </summary>
         private Configuration _configuration;
 
+        /// <summary>
+        ///     Selected blam.sav exists.
+        /// </summary>
         private bool _canEdit;
 
+        /// <summary>
+        ///  <see cref="_path"/>
+        /// </summary>
         public string Path
         {
             get => _path;
@@ -28,6 +43,9 @@ namespace BalsamV
             }
         }
 
+        /// <summary>
+        ///  <see cref="_configuration"/>
+        /// </summary>
         public Configuration Configuration
         {
             get => _configuration;
@@ -39,6 +57,9 @@ namespace BalsamV
             }
         }
 
+        /// <summary>
+        ///  <see cref="_canEdit"/>
+        /// </summary>
         public bool CanEdit
         {
             get => _canEdit;
@@ -50,6 +71,9 @@ namespace BalsamV
             }
         }
 
+        /// <summary>
+        ///     Attempts to auto-detect & load a blam.sav on the file system.
+        /// </summary>
         public void Initialise()
         {
             try
@@ -63,19 +87,20 @@ namespace BalsamV
             }
         }
 
+        /// <summary>
+        ///     Invoke parsing of the selected blam.sav upon path change.
+        /// </summary>
         private void OnPathChanged()
         {
-            if (File.Exists(Path))
-            {
-                Configuration = Atarashii.API.Profile.Parse(Path);
-                CanEdit = true;
-            }
+            if (!File.Exists(Path)) return;
+            Configuration = Atarashii.API.Profile.Parse(Path);
+            CanEdit = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -22,6 +22,9 @@ namespace BalsamV
             _main.Initialise();
         }
 
+        /// <summary>
+        ///     Assigns the Atarashii enumerators to the combo boxes.
+        /// </summary>
         private void InitialiseComboBoxes()
         {
             ColourComboBox.ItemsSource = Enum.GetValues(typeof(Colour.Type)).Cast<Colour.Type>();
@@ -33,6 +36,9 @@ namespace BalsamV
             VarietyComboBox.ItemsSource = Enum.GetValues(typeof(Quality.Type)).Cast<Quality.Type>();
         }
 
+        /// <summary>
+        ///     Invokes the blam.sav file picker.
+        /// </summary>
         private void Load(object sender, RoutedEventArgs routedEventArgs)
         {
             var dialog = new OpenFileDialog
