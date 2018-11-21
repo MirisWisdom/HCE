@@ -14,6 +14,8 @@ namespace BalsamV
 
         private Configuration _configuration;
 
+        private bool _canEdit;
+
         public string Path
         {
             get => _path;
@@ -37,6 +39,17 @@ namespace BalsamV
             }
         }
 
+        public bool CanEdit
+        {
+            get => _canEdit;
+            set
+            {
+                if (value == _canEdit) return;
+                _canEdit = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void Initialise()
         {
             try
@@ -52,7 +65,11 @@ namespace BalsamV
 
         private void OnPathChanged()
         {
-            Configuration = Atarashii.API.Profile.Parse(Path);
+            if (File.Exists(Path))
+            {
+                Configuration = Atarashii.API.Profile.Parse(Path);
+                CanEdit = true;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

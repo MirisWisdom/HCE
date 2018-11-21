@@ -52,7 +52,8 @@
 
             <!-- Player Information -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Player Information">
+                      Header="Player Information"
+                      IsEnabled="{Binding CanEdit}">
                 <DockPanel>
 
                     <!-- Name -->
@@ -72,7 +73,8 @@
 
             <!-- Mouse Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Mouse Settings">
+                      Header="Mouse Settings"
+                      IsEnabled="{Binding CanEdit}">
                 <DockPanel>
 
                     <!-- Sensitivity -->
@@ -131,7 +133,8 @@
 
             <!-- Network Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Network Settings">
+                      Header="Network Settings"
+                      IsEnabled="{Binding CanEdit}">
                 <DockPanel>
 
                     <!-- Connection -->
@@ -171,7 +174,8 @@
         <DockPanel Grid.Column="1">
             <!-- Video Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Video Settings">
+                      Header="Video Settings"
+                      IsEnabled="{Binding CanEdit}">
                 <DockPanel>
 
                     <!-- Resolution -->
@@ -251,7 +255,8 @@
 
             <!-- Audio Settings -->
             <GroupBox DockPanel.Dock="Top"
-                      Header="Audio Settings">
+                      Header="Audio Settings"
+                      IsEnabled="{Binding CanEdit}">
                 <DockPanel>
 
                     <!-- Volumes -->
@@ -344,6 +349,7 @@
                     <Button Grid.Column="1"
                             Content="Save"
                             VerticalAlignment="Stretch"
+                            IsEnabled="{Binding CanEdit}"
                             Margin="1,0,0,0" />
                 </Grid>
             </GroupBox>
