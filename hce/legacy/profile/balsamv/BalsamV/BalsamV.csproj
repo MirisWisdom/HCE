@@ -61,12 +61,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Main.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -85,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atarashii\Atarashii.API\Atarashii.API.csproj">
+      <Project>{2c5d2b0e-fea7-43f2-9960-215280cca7b7}</Project>
+      <Name>Atarashii.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atarashii\Atarashii\Atarashii.csproj">
+      <Project>{9665535f-b184-41f6-ac56-85db14fd3b79}</Project>
+      <Name>Atarashii</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
