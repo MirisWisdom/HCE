@@ -6,251 +6,299 @@
         xmlns:local="clr-namespace:BalsamV"
         mc:Ignorable="d"
         Title="HCE.BalsamV"
-        Width="320"
+        Width="640"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize" SizeToContent="Height">
-    <StackPanel>
-        <StackPanel.Resources>
+        ResizeMode="CanMinimize"
+        SizeToContent="Height"
+        Background="#eaeaea">
+    <Grid Margin="5">
+        <Grid.Resources>
+            <Style TargetType="{x:Type DockPanel}">
+                <Setter Property="Margin" Value="0,1,0,0" />
+            </Style>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="-1,1,0,1" />
+                <Setter Property="Background" Value="#FFF4F4F4" />
+            </Style>
             <Style TargetType="{x:Type Label}">
                 <Setter Property="Width" Value="75" />
+                <Setter Property="Padding" Value="0 5" />
             </Style>
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Background" Value="#FFF4F4F4" />
             </Style>
-        </StackPanel.Resources>
+        </Grid.Resources>
 
-        <!-- Player Information -->
-        <GroupBox Header="Player Information">
-            <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-                <!-- Name -->
+        <DockPanel Grid.Column="0">
+
+            <!-- Player Information -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Player Information">
                 <DockPanel>
-                    <Label Content="Name:" />
-                    <TextBox />
-                </DockPanel>
 
-                <!-- Colour -->
+                    <!-- Name -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Name:" />
+                        <TextBox />
+                    </DockPanel>
+
+                    <!-- Colour -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Colour:" />
+                        <ComboBox />
+                    </DockPanel>
+                </DockPanel>
+            </GroupBox>
+
+            <!-- Mouse Settings -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Mouse Settings">
                 <DockPanel>
-                    <Label Content="Colour:" />
-                    <ComboBox />
+
+                    <!-- Sensitivity -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Sensitivity:"
+                               VerticalAlignment="Center" />
+
+                        <StackPanel>
+
+                            <!-- Horizontal -->
+                            <DockPanel>
+                                <Label Content="Horizontal:"
+                                       HorizontalAlignment="Left" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Vertical -->
+                            <DockPanel>
+                                <Label Content="Vertical:"
+                                       HorizontalAlignment="Left" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Vertical Axis -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Vertical Axis:" />
+
+                        <!-- Invert -->
+                        <CheckBox Content="Invert"
+                                  VerticalAlignment="Center" />
+                    </DockPanel>
                 </DockPanel>
-            </StackPanel>
-        </GroupBox>
+            </GroupBox>
 
-        <!-- Mouse Settings -->
-        <GroupBox Header="Mouse Settings">
-            <StackPanel>
-
-                <!-- Sensitivity -->
+            <!-- Audio Settings -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Audio Settings">
                 <DockPanel>
-                    <Label Content="Sensitivity:"
-                           VerticalAlignment="Center" />
 
-                    <StackPanel>
+                    <!-- Volumes -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Volumes:"
+                               VerticalAlignment="Center" />
 
-                        <!-- Horizontal -->
-                        <DockPanel>
-                            <Label Content="Horizontal:"
-                                   HorizontalAlignment="Left" />
-                            <TextBox DockPanel.Dock="Right"
-                                     Width="25"
-                                     IsReadOnly="True"
-                                     HorizontalContentAlignment="Center" />
-                            <Slider Minimum="1"
-                                    IsSnapToTickEnabled="True"
-                                    VerticalAlignment="Center" />
-                        </DockPanel>
+                        <!-- Master  -->
+                        <StackPanel>
+                            <DockPanel>
+                                <Label Content="Master:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
 
-                        <!-- Vertical -->
-                        <DockPanel>
-                            <Label Content="Vertical:"
-                                   HorizontalAlignment="Left" />
-                            <TextBox DockPanel.Dock="Right"
-                                     Width="25"
-                                     IsReadOnly="True"
-                                     HorizontalContentAlignment="Center" />
-                            <Slider Minimum="1"
-                                    IsSnapToTickEnabled="True"
-                                    VerticalAlignment="Center" />
-                        </DockPanel>
-                    </StackPanel>
+                            <!-- Effects -->
+                            <DockPanel>
+                                <Label Content="Effects:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Music -->
+                            <DockPanel>
+                                <Label Content="Music:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         Width="25"
+                                         IsReadOnly="True"
+                                         HorizontalContentAlignment="Center" />
+                                <Slider Minimum="1"
+                                        IsSnapToTickEnabled="True"
+                                        VerticalAlignment="Center" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Quality -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Quality:" />
+                        <ComboBox />
+                    </DockPanel>
+
+                    <!-- Variety -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Variety:" />
+                        <ComboBox />
+                    </DockPanel>
                 </DockPanel>
+            </GroupBox>
+        </DockPanel>
 
-                <!-- Vertical Axis -->
+        <DockPanel Grid.Column="1">
+            <!-- Video Settings -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Video Settings">
                 <DockPanel>
-                    <Label Content="Vertical Axis:" />
 
-                    <!-- Invert -->
-                    <CheckBox Content="Invert"
-                              VerticalAlignment="Center" />
+                    <!-- Resolution -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Resolution:"
+                               VerticalAlignment="Center" />
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Width -->
+                                <TextBox Grid.Column="0"
+                                         HorizontalContentAlignment="Center" />
+
+                                <!-- Separator -->
+                                <Label Grid.Column="1"
+                                       Content="x"
+                                       HorizontalContentAlignment="Center"
+                                       HorizontalAlignment="Center" />
+
+                                <!-- Height -->
+                                <TextBox Grid.Column="2"
+                                         HorizontalContentAlignment="Center" />
+                            </Grid>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <!-- Frame Rate -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Frame Rate:" />
+                        <ComboBox />
+                    </DockPanel>
+
+                    <!-- GFX Effects -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label VerticalAlignment="Center"
+                               Content="GFX Effects:" />
+                        <StackPanel>
+                            <!-- Specular -->
+                            <CheckBox Content="Specular" />
+
+                            <!-- Shadows -->
+                            <CheckBox Content="Shadows" />
+
+                            <!-- Decals -->
+                            <CheckBox Content="Decals" />
+                        </StackPanel>
+                    </DockPanel>
+
+
+                    <!-- Texture Quality Level -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Textures:" />
+                        <ComboBox />
+                    </DockPanel>
+
+                    <!-- Particles Quality Level -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Particles:" />
+                        <ComboBox />
+                    </DockPanel>
                 </DockPanel>
-            </StackPanel>
-        </GroupBox>
+            </GroupBox>
 
-        <!-- Audio Settings -->
-        <GroupBox Header="Audio Settings">
-            <StackPanel>
-
-                <!-- Volumes -->
+            <!-- Network Settings -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Network Settings">
                 <DockPanel>
-                    <Label Content="Volumes:"
-                           VerticalAlignment="Center" />
 
-                    <!-- Master  -->
-                    <StackPanel>
-                        <DockPanel>
-                            <Label Content="Master:" />
-                            <TextBox DockPanel.Dock="Right"
-                                     Width="25"
-                                     IsReadOnly="True"
-                                     HorizontalContentAlignment="Center" />
-                            <Slider Minimum="1"
-                                    IsSnapToTickEnabled="True"
-                                    VerticalAlignment="Center" />
-                        </DockPanel>
+                    <!-- Connection -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Connection:" />
+                        <ComboBox />
+                    </DockPanel>
 
-                        <!-- Effects -->
-                        <DockPanel>
-                            <Label Content="Effects:" />
-                            <TextBox DockPanel.Dock="Right"
-                                     Width="25"
-                                     IsReadOnly="True"
-                                     HorizontalContentAlignment="Center" />
-                            <Slider Minimum="1"
-                                    IsSnapToTickEnabled="True"
-                                    VerticalAlignment="Center" />
-                        </DockPanel>
+                    <!-- Ports -->
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="UDP Ports:"
+                               VerticalAlignment="Center" />
+                        <StackPanel>
 
-                        <!-- Music -->
-                        <DockPanel>
-                            <Label Content="Music:" />
-                            <TextBox DockPanel.Dock="Right"
-                                     Width="25"
-                                     IsReadOnly="True"
-                                     HorizontalContentAlignment="Center" />
-                            <Slider Minimum="1"
-                                    IsSnapToTickEnabled="True"
-                                    VerticalAlignment="Center" />
-                        </DockPanel>
-                    </StackPanel>
+                            <!-- Server -->
+                            <DockPanel>
+                                <Label Content="Server:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         HorizontalContentAlignment="Center" />
+                            </DockPanel>
+
+                            <!-- Client -->
+                            <DockPanel>
+                                <Label Content="Client:" />
+                                <TextBox DockPanel.Dock="Right"
+                                         HorizontalContentAlignment="Center" />
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
                 </DockPanel>
+            </GroupBox>
 
-                <!-- Quality -->
-                <DockPanel>
-                    <Label Content="Quality:" />
-                    <ComboBox />
-                </DockPanel>
+            <!-- Operations -->
+            <GroupBox DockPanel.Dock="Top"
+                      Header="Operations:"
+                      VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-                <!-- Variety -->
-                <DockPanel>
-                    <Label Content="Variety:" />
-                    <ComboBox />
-                </DockPanel>
-            </StackPanel>
-        </GroupBox>
+                    <!-- Load -->
+                    <Button Grid.Column="0"
+                            Content="Load"
+                            VerticalAlignment="Stretch" />
 
-        <!-- Video Settings -->
-        <GroupBox Header="Video Settings">
-            <StackPanel>
-
-                <!-- Resolution -->
-                <DockPanel>
-                    <Label Content="Resolution:"
-                           VerticalAlignment="Center" />
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="25" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
-                            <!-- Width -->
-                            <TextBox Grid.Column="0"
-                                     HorizontalContentAlignment="Center" />
-
-                            <!-- Separator -->
-                            <Label Grid.Column="1"
-                                   Content="x"
-                                   HorizontalContentAlignment="Center"
-                                   HorizontalAlignment="Center" />
-
-                            <!-- Height -->
-                            <TextBox Grid.Column="2"
-                                     HorizontalContentAlignment="Center" />
-                        </Grid>
-                    </StackPanel>
-                </DockPanel>
-
-                <!-- Frame Rate -->
-                <DockPanel>
-                    <Label Content="Frame Rate:" />
-                    <ComboBox />
-                </DockPanel>
-
-                <!-- GFX Effects -->
-                <DockPanel>
-                    <Label VerticalAlignment="Center"
-                           Content="GFX Effects:" />
-                    <StackPanel>
-                        <!-- Specular -->
-                        <CheckBox Content="Specular" />
-
-                        <!-- Shadows -->
-                        <CheckBox Content="Shadows" />
-
-                        <!-- Decals -->
-                        <CheckBox Content="Decals" />
-                    </StackPanel>
-                </DockPanel>
-
-
-                <!-- Texture Quality Level -->
-                <DockPanel>
-                    <Label Content="Textures:" />
-                    <ComboBox />
-                </DockPanel>
-
-                <!-- Particles Quality Level -->
-                <DockPanel>
-                    <Label Content="Particles:" />
-                    <ComboBox />
-                </DockPanel>
-            </StackPanel>
-        </GroupBox>
-
-        <!-- Network Settings -->
-        <GroupBox Header="Network Settings">
-            <StackPanel>
-
-                <!-- Connection -->
-                <DockPanel>
-                    <Label Content="Connection:" />
-                    <ComboBox />
-                </DockPanel>
-
-                <!-- Ports -->
-                <DockPanel>
-                    <Label Content="UDP Ports:"
-                           VerticalAlignment="Center" />
-                    <StackPanel>
-
-                        <!-- Server -->
-                        <DockPanel>
-                            <Label Content="Server:" />
-                            <TextBox DockPanel.Dock="Right"
-                                     HorizontalContentAlignment="Center" />
-                        </DockPanel>
-
-                        <!-- Client -->
-                        <DockPanel>
-                            <Label Content="Client:" />
-                            <TextBox DockPanel.Dock="Right"
-                                     HorizontalContentAlignment="Center" />
-                        </DockPanel>
-                    </StackPanel>
-                </DockPanel>
-            </StackPanel>
-        </GroupBox>
-    </StackPanel>
+                    <!-- Save -->
+                    <Button Grid.Column="1"
+                            Content="Save"
+                            VerticalAlignment="Stretch" />
+                </Grid>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
 </Window>
