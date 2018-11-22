@@ -89,6 +89,11 @@ namespace BalsamV
             }
         }
 
+        public void Save()
+        {
+            Profile.Patch(Configuration, Path);
+        }
+
         /// <summary>
         ///     Invoke parsing of the selected blam.sav upon path change.
         /// </summary>

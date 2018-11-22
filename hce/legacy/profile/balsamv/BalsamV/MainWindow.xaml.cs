@@ -51,6 +51,11 @@ namespace BalsamV
                 _main.Path = dialog.FileName;
         }
 
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            _main.Save();
+        }
+
         private void About(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/yumiris/HCE.BalsamV");
