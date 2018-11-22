@@ -370,7 +370,8 @@
                                 Content="Save"
                                 VerticalAlignment="Stretch"
                                 IsEnabled="{Binding CanEdit}"
-                                Margin="1,0,0,0" />
+                                Margin="1,0,0,0"
+                                Click="Save" />
                     </Grid>
                 </GroupBox>
             </DockPanel>
