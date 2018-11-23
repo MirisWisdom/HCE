@@ -8,7 +8,7 @@ namespace BalsamV
     /// <summary>
     ///     Hash forger for a HCE configuration file (blam.sav).
     /// </summary>
-    public class ConfigurationForger
+    public class BlamForger
     {
         /// <summary>
         ///     Forges the inbound stream's checksum.
@@ -18,7 +18,7 @@ namespace BalsamV
         /// </param>
         public void Forge(Stream stream)
         {
-            var amount = Configuration.BlamLength - Configuration.BlamHashLength;
+            var amount = Blam.BlamLength - Blam.BlamHashLength;
             var buffer = new byte[amount];
 
             stream.Position = 0;
@@ -38,7 +38,7 @@ namespace BalsamV
             Array.Reverse(forge);
 
             var writer = new BinaryWriter(stream);
-            writer.BaseStream.Seek(Configuration.BlamHashOffset, SeekOrigin.Begin);
+            writer.BaseStream.Seek(Blam.BlamHashOffset, SeekOrigin.Begin);
             writer.Write(forge);
         }
 

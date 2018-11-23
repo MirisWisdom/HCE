@@ -9,13 +9,13 @@ namespace BalsamV.Tests
     [TestFixture]
     public class ProfileTests
     {
-        private readonly Configuration _configuration =
-            ConfigurationFactory.GetFromStream(new MemoryStream(ProfileTestData.blam));
+        private readonly Blam _blam =
+            BlamFactory.GetFromStream(new MemoryStream(ProfileTestData.blam));
 
         [Test]
         public void InvalidName_ThrowsException_True()
         {
-            var configuration = new Configuration();
+            var configuration = new Blam();
 
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() => configuration.Name = "Hello from Gensokyo");
             StringAssert.Contains("Assigned name value is greater than 11 characters.", ex.Message);
@@ -24,7 +24,7 @@ namespace BalsamV.Tests
         [Test]
         public void InvalidResolution_ThrowsException_True()
         {
-            var configuration = new Configuration();
+            var configuration = new Blam();
 
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() => configuration.Video.Resolution.Width = 0);
             StringAssert.Contains("Assigned dimension value is either 0 or over 32767.", ex.Message);
@@ -33,7 +33,7 @@ namespace BalsamV.Tests
         [Test]
         public void InvalidSensitivity_ThrowsException_True()
         {
-            var configuration = new Configuration();
+            var configuration = new Blam();
 
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() => configuration.Mouse.Sensitivity.Horizontal = 11);
             StringAssert.Contains("Assigned sensitivity value is less than 1 or greater than 10.", ex.Message);
@@ -42,7 +42,7 @@ namespace BalsamV.Tests
         [Test]
         public void InvalidVolume_ThrowsException_True()
         {
-            var configuration = new Configuration();
+            var configuration = new Blam();
 
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() => configuration.Audio.Volume.Music = 15);
             StringAssert.Contains("Assigned volume value is greater than 10.", ex.Message);
@@ -51,92 +51,92 @@ namespace BalsamV.Tests
         [Test]
         public void ProfileParsing_AudioQualityCorrect_True()
         {
-            Assert.That(_configuration.Audio.Quality, Is.EqualTo(Quality.Medium));
+            Assert.That(_blam.Audio.Quality, Is.EqualTo(Quality.Medium));
         }
 
         [Test]
         public void ProfileParsing_AudioVarietyIsCorrect_True()
         {
-            Assert.That(_configuration.Audio.Variety, Is.EqualTo(Quality.High));
+            Assert.That(_blam.Audio.Variety, Is.EqualTo(Quality.High));
         }
 
         [Test]
         public void ProfileParsing_AudioVolumeIsCorrect_True()
         {
-            Assert.That(_configuration.Audio.Volume.Master, Is.EqualTo(10));
-            Assert.That(_configuration.Audio.Volume.Effects, Is.EqualTo(10));
-            Assert.That(_configuration.Audio.Volume.Music, Is.EqualTo(6));
+            Assert.That(_blam.Audio.Volume.Master, Is.EqualTo(10));
+            Assert.That(_blam.Audio.Volume.Effects, Is.EqualTo(10));
+            Assert.That(_blam.Audio.Volume.Music, Is.EqualTo(6));
         }
 
         [Test]
         public void ProfileParsing_ColourIsCorrect_True()
         {
-            Assert.That(_configuration.Colour, Is.EqualTo(Colour.White));
+            Assert.That(_blam.Colour, Is.EqualTo(Colour.White));
         }
 
         [Test]
         public void ProfileParsing_MouseAxisInversionIsCorrect_True()
         {
-            Assert.That(_configuration.Mouse.InvertVerticalAxis, Is.EqualTo(false));
+            Assert.That(_blam.Mouse.InvertVerticalAxis, Is.EqualTo(false));
         }
 
         [Test]
         public void ProfileParsing_MouseSensitivityIsCorrect_True()
         {
-            Assert.That(_configuration.Mouse.Sensitivity.Horizontal, Is.EqualTo(3));
-            Assert.That(_configuration.Mouse.Sensitivity.Vertical, Is.EqualTo(3));
+            Assert.That(_blam.Mouse.Sensitivity.Horizontal, Is.EqualTo(3));
+            Assert.That(_blam.Mouse.Sensitivity.Vertical, Is.EqualTo(3));
         }
 
         [Test]
         public void ProfileParsing_NameIsCorrect_True()
         {
-            Assert.That(_configuration.Name, Is.EqualTo("New001"));
+            Assert.That(_blam.Name, Is.EqualTo("New001"));
         }
 
         [Test]
         public void ProfileParsing_NetworkPortsAreCorrect_True()
         {
-            Assert.That(_configuration.Network.Port.Server, Is.EqualTo(2302));
-            Assert.That(_configuration.Network.Port.Client, Is.EqualTo(2303));
+            Assert.That(_blam.Network.Port.Server, Is.EqualTo(2302));
+            Assert.That(_blam.Network.Port.Client, Is.EqualTo(2303));
         }
 
         [Test]
         public void ProfileParsing_NetworkTypeIsCorrect_True()
         {
-            Assert.That(_configuration.Network.Connection, Is.EqualTo(Connection.DslLow));
+            Assert.That(_blam.Network.Connection, Is.EqualTo(Connection.DslLow));
         }
 
         [Test]
         public void ProfileParsing_VideoEffectsAreCorrect_True()
         {
-            Assert.That(_configuration.Video.Effects.Specular, Is.EqualTo(true));
-            Assert.That(_configuration.Video.Effects.Shadows, Is.EqualTo(true));
-            Assert.That(_configuration.Video.Effects.Decals, Is.EqualTo(true));
+            Assert.That(_blam.Video.Effects.Specular, Is.EqualTo(true));
+            Assert.That(_blam.Video.Effects.Shadows, Is.EqualTo(true));
+            Assert.That(_blam.Video.Effects.Decals, Is.EqualTo(true));
         }
 
         [Test]
         public void ProfileParsing_VideoFrameRateIsCorrect_True()
         {
-            Assert.That(_configuration.Video.FrameRate, Is.EqualTo(FrameRate.Fps30));
+            Assert.That(_blam.Video.FrameRate, Is.EqualTo(FrameRate.Fps30));
         }
 
         [Test]
         public void ProfileParsing_VideoParticlesIsCorrect_True()
         {
-            Assert.That(_configuration.Video.Particles, Is.EqualTo(Particles.High));
+            Assert.That(_blam.Video.Particles, Is.EqualTo(Particles.High));
         }
 
         [Test]
         public void ProfileParsing_VideoQualityIsCorrect_True()
         {
-            Assert.That(_configuration.Video.Particles, Is.EqualTo(Particles.High));
+            Assert.That(_blam.Video.Particles, Is.EqualTo(Particles.High));
         }
 
         [Test]
         public void ProfileParsing_VideoResolutionIsCorrect_True()
         {
-            Assert.That(_configuration.Video.Resolution.Width, Is.EqualTo(800));
-            Assert.That(_configuration.Video.Resolution.Height, Is.EqualTo(600));
+            Assert.That(_blam.Video.Resolution.Width, Is.EqualTo(800));
+            Assert.That(_blam.Video.Resolution.Height, Is.EqualTo(600));
         }
     }
 }

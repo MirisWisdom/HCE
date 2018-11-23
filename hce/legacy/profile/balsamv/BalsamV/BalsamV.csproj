@@ -38,19 +38,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Exceptions\PackageException.cs" />
-    <Compile Include="Common\Exceptions\VerifierException.cs" />
-    <Compile Include="Common\IVerifiable.cs" />
-    <Compile Include="Common\Module.cs" />
-    <Compile Include="Common\Output.cs" />
-    <Compile Include="Common\Verification.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigurationFactory.cs" />
-    <Compile Include="ConfigurationForger.cs" />
-    <Compile Include="ConfigurationPatcher.cs" />
+    <Compile Include="Blam.cs" />
+    <Compile Include="BlamFactory.cs" />
+    <Compile Include="BlamForger.cs" />
+    <Compile Include="BlamPatcher.cs" />
     <Compile Include="Lastprof.cs" />
     <Compile Include="LastprofFactory.cs" />
-    <Compile Include="ProfileException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

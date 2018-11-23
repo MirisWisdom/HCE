@@ -70,7 +70,7 @@
                         <!-- Name -->
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Name:" />
-                            <TextBox Text="{Binding Configuration.Name}"
+                            <TextBox Text="{Binding Blam.Name}"
                                      MaxLength="11" />
                         </DockPanel>
 
@@ -78,7 +78,7 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Colour:" />
                             <ComboBox x:Name="ColourComboBox"
-                                      SelectedItem="{Binding Configuration.Colour}" />
+                                      SelectedItem="{Binding Blam.Colour}" />
                         </DockPanel>
                     </DockPanel>
                 </GroupBox>
@@ -110,7 +110,7 @@
                                             IsSnapToTickEnabled="True"
                                             VerticalAlignment="Center"
                                             x:Name="SensitivityHorizontalSlider"
-                                            Value="{Binding Configuration.Mouse.Sensitivity.Horizontal}" />
+                                            Value="{Binding Blam.Mouse.Sensitivity.Horizontal}" />
                                 </DockPanel>
 
                                 <!-- Vertical -->
@@ -127,7 +127,7 @@
                                             IsSnapToTickEnabled="True"
                                             VerticalAlignment="Center"
                                             x:Name="SensitivityVerticalSlider"
-                                            Value="{Binding Configuration.Mouse.Sensitivity.Vertical}" />
+                                            Value="{Binding Blam.Mouse.Sensitivity.Vertical}" />
                                 </DockPanel>
                             </StackPanel>
                         </DockPanel>
@@ -139,7 +139,7 @@
                             <!-- Invert -->
                             <CheckBox Content="Invert"
                                       VerticalAlignment="Center"
-                                      IsChecked="{Binding Configuration.Mouse.InvertVerticalAxis}" />
+                                      IsChecked="{Binding Blam.Mouse.InvertVerticalAxis}" />
                         </DockPanel>
                     </DockPanel>
                 </GroupBox>
@@ -155,7 +155,7 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Connection:" />
                             <ComboBox x:Name="ConnectionComboBox"
-                                      SelectedItem="{Binding Configuration.Network.Connection}" />
+                                      SelectedItem="{Binding Blam.Network.Connection}" />
                         </DockPanel>
 
                         <!-- Ports -->
@@ -169,7 +169,7 @@
                                     <Label Content="Server:" />
                                     <TextBox DockPanel.Dock="Right"
                                              HorizontalContentAlignment="Center"
-                                             Text="{Binding Configuration.Network.Port.Server}"
+                                             Text="{Binding Blam.Network.Port.Server}"
                                              MaxLength="5" />
                                 </DockPanel>
 
@@ -178,7 +178,7 @@
                                     <Label Content="Client:" />
                                     <TextBox DockPanel.Dock="Right"
                                              HorizontalContentAlignment="Center"
-                                             Text="{Binding Configuration.Network.Port.Client}"
+                                             Text="{Binding Blam.Network.Port.Client}"
                                              MaxLength="5" />
                                 </DockPanel>
                             </StackPanel>
@@ -209,7 +209,7 @@
                                     <!-- Width -->
                                     <TextBox Grid.Column="0"
                                              HorizontalContentAlignment="Center"
-                                             Text="{Binding Configuration.Video.Resolution.Width}"
+                                             Text="{Binding Blam.Video.Resolution.Width}"
                                              MaxLength="5" />
 
                                     <!-- Separator -->
@@ -221,7 +221,7 @@
                                     <!-- Height -->
                                     <TextBox Grid.Column="2"
                                              HorizontalContentAlignment="Center"
-                                             Text="{Binding Configuration.Video.Resolution.Height}"
+                                             Text="{Binding Blam.Video.Resolution.Height}"
                                              MaxLength="5" />
                                 </Grid>
                             </StackPanel>
@@ -231,7 +231,7 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Frame Rate:" />
                             <ComboBox x:Name="FrameRateComboBox"
-                                      SelectedItem="{Binding Configuration.Video.FrameRate}" />
+                                      SelectedItem="{Binding Blam.Video.FrameRate}" />
                         </DockPanel>
 
                         <!-- GFX Effects -->
@@ -241,15 +241,15 @@
                             <StackPanel>
                                 <!-- Specular -->
                                 <CheckBox Content="Specular"
-                                          IsChecked="{Binding Configuration.Video.Effects.Specular}" />
+                                          IsChecked="{Binding Blam.Video.Effects.Specular}" />
 
                                 <!-- Shadows -->
                                 <CheckBox Content="Shadows"
-                                          IsChecked="{Binding Configuration.Video.Effects.Shadows}" />
+                                          IsChecked="{Binding Blam.Video.Effects.Shadows}" />
 
                                 <!-- Decals -->
                                 <CheckBox Content="Decals"
-                                          IsChecked="{Binding Configuration.Video.Effects.Decals}" />
+                                          IsChecked="{Binding Blam.Video.Effects.Decals}" />
                             </StackPanel>
                         </DockPanel>
 
@@ -258,14 +258,14 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Textures:" />
                             <ComboBox x:Name="TextureQualityComboBox"
-                                      SelectedItem="{Binding Configuration.Video.Quality}" />
+                                      SelectedItem="{Binding Blam.Video.Quality}" />
                         </DockPanel>
 
                         <!-- Particles Quality Level -->
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Particles:" />
                             <ComboBox x:Name="ParticlesComboBox"
-                                      SelectedItem="{Binding Configuration.Video.Particles}" />
+                                      SelectedItem="{Binding Blam.Video.Particles}" />
                         </DockPanel>
                     </DockPanel>
                 </GroupBox>
@@ -296,7 +296,7 @@
                                             IsSnapToTickEnabled="True"
                                             VerticalAlignment="Center"
                                             x:Name="VolumeMasterSlider"
-                                            Value="{Binding Configuration.Audio.Volume.Master}" />
+                                            Value="{Binding Blam.Audio.Volume.Master}" />
                                 </DockPanel>
 
                                 <!-- Effects -->
@@ -312,7 +312,7 @@
                                             IsSnapToTickEnabled="True"
                                             VerticalAlignment="Center"
                                             x:Name="VolumeEffectsSlider"
-                                            Value="{Binding Configuration.Audio.Volume.Effects}" />
+                                            Value="{Binding Blam.Audio.Volume.Effects}" />
                                 </DockPanel>
 
                                 <!-- Music -->
@@ -328,7 +328,7 @@
                                             IsSnapToTickEnabled="True"
                                             VerticalAlignment="Center"
                                             x:Name="VolumeMusicSlider"
-                                            Value="{Binding Configuration.Audio.Volume.Music}" />
+                                            Value="{Binding Blam.Audio.Volume.Music}" />
                                 </DockPanel>
                             </StackPanel>
                         </DockPanel>
@@ -337,14 +337,14 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Quality:" />
                             <ComboBox x:Name="AudioQualityComboBox"
-                                      SelectedItem="{Binding Configuration.Audio.Quality}" />
+                                      SelectedItem="{Binding Blam.Audio.Quality}" />
                         </DockPanel>
 
                         <!-- Variety -->
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Variety:" />
                             <ComboBox x:Name="VarietyComboBox"
-                                      SelectedItem="{Binding Configuration.Audio.Variety}" />
+                                      SelectedItem="{Binding Blam.Audio.Variety}" />
                         </DockPanel>
                     </DockPanel>
                 </GroupBox>

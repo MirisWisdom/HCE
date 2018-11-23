@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using BalsamV.GUI.Properties;
 
 namespace BalsamV.GUI
@@ -12,14 +12,14 @@ namespace BalsamV.GUI
     public sealed class Main : INotifyPropertyChanged
     {
         /// <summary>
+        ///     Atarashii Profile Configuration for the selected blam.sav.
+        /// </summary>
+        private Blam _blam;
+
+        /// <summary>
         ///     Selected blam.sav exists.
         /// </summary>
         private bool _canEdit;
-
-        /// <summary>
-        ///     Atarashii Profile Configuration for the selected blam.sav.
-        /// </summary>
-        private Configuration _configuration;
 
         /// <summary>
         ///     Selected Blam.sav absolute path.
@@ -42,15 +42,15 @@ namespace BalsamV.GUI
         }
 
         /// <summary>
-        ///     <see cref="_configuration" />
+        ///     <see cref="_blam" />
         /// </summary>
-        public Configuration Configuration
+        public Blam Blam
         {
-            get => _configuration;
+            get => _blam;
             set
             {
-                if (Equals(value, _configuration)) return;
-                _configuration = value;
+                if (Equals(value, _blam)) return;
+                _blam = value;
                 OnPropertyChanged();
             }
         }
@@ -78,31 +78,32 @@ namespace BalsamV.GUI
         {
             try
             {
-                var profile = LastprofFactory.Get(LastprofFactory.Type.Detect).Parse();
-
+                var name = LastprofFactory.DetectOnSystem().Name;
                 Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                    "My Games", "Halo CE", "savegames", profile, "blam.sav");
+                    "My Games", "Halo CE", "savegames", name, "blam.sav");
+
+                Blam = BlamFactory.GetFromBinary(Path);
+                CanEdit = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Configuration = new Configuration();
+                MessageBox.Show(e.Message);
+                CanEdit = false;
             }
         }
 
+        /// <summary>
+        ///     Invoke patching of the blam.sav with the current Blam state.
+        /// </summary>
         public void Save()
         {
-            using (var ms = new MemoryStream())
-            using (var fs = File.Open(Path, FileMode.Open))
+            try
             {
-                fs.CopyTo(ms);
-
-                new ConfigurationPatcher(Configuration).PatchTo(ms);
-                new ConfigurationForger().Forge(ms);
-
-                ms.Position = 0;
-                fs.Position = 0;
-
-                ms.CopyTo(fs);
+                new BlamPatcher(Blam).PatchToBinary(Path);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -111,14 +112,16 @@ namespace BalsamV.GUI
         /// </summary>
         private void OnPathChanged()
         {
-            if (!File.Exists(Path)) return;
-
-            using (var fs = File.Open(Path, FileMode.Open))
+            try
             {
-                Configuration = ConfigurationFactory.GetFromStream(fs);
+                Blam = BlamFactory.GetFromBinary(Path);
+                CanEdit = true;
             }
-
-            CanEdit = true;
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                CanEdit = false;
+            }
         }
 
         [NotifyPropertyChangedInvocator]

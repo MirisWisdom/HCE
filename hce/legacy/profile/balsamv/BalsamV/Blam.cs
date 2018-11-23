@@ -6,12 +6,11 @@ using BalsamV.Settings;
 namespace BalsamV
 {
     // TODO: Controls/gamepad settings.
-    // TODO: Documentation for the rest of the enum values.
 
     /// <summary>
-    ///     This type is used to represent a HCE profile configuration.
+    ///     This type is used to represent a HCE profile configuration - blam.sav binary.
     /// </summary>
-    public class Configuration
+    public class Blam
     {
         /// <summary>
         ///     Length of the blam.sav binary.
