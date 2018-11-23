@@ -28,13 +28,13 @@ namespace BalsamV
         /// </summary>
         private void InitialiseComboBoxes()
         {
-            ColourComboBox.ItemsSource = Enum.GetValues(typeof(Colour.Type)).Cast<Colour.Type>();
-            ConnectionComboBox.ItemsSource = Enum.GetValues(typeof(Connection.Type)).Cast<Connection.Type>();
-            FrameRateComboBox.ItemsSource = Enum.GetValues(typeof(FrameRate.Type)).Cast<FrameRate.Type>();
-            TextureQualityComboBox.ItemsSource = Enum.GetValues(typeof(Quality.Type)).Cast<Quality.Type>();
-            ParticlesComboBox.ItemsSource = Enum.GetValues(typeof(Particles.Type)).Cast<Particles.Type>();
-            AudioQualityComboBox.ItemsSource = Enum.GetValues(typeof(Quality.Type)).Cast<Quality.Type>();
-            VarietyComboBox.ItemsSource = Enum.GetValues(typeof(Quality.Type)).Cast<Quality.Type>();
+            ColourComboBox.ItemsSource = Enum.GetValues(typeof(Colour)).Cast<Colour>();
+            ConnectionComboBox.ItemsSource = Enum.GetValues(typeof(Connection)).Cast<Connection>();
+            FrameRateComboBox.ItemsSource = Enum.GetValues(typeof(FrameRate)).Cast<FrameRate>();
+            TextureQualityComboBox.ItemsSource = Enum.GetValues(typeof(Quality)).Cast<Quality>();
+            ParticlesComboBox.ItemsSource = Enum.GetValues(typeof(Particles)).Cast<Particles>();
+            AudioQualityComboBox.ItemsSource = Enum.GetValues(typeof(Quality)).Cast<Quality>();
+            VarietyComboBox.ItemsSource = Enum.GetValues(typeof(Quality)).Cast<Quality>();
         }
 
         /// <summary>
