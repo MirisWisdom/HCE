@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{02665F11-3CDB-472A-8BF8-951B94F544A5}</ProjectGuid>
+    <ProjectGuid>{22050973-8D68-4EBE-9372-69E902D70058}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BalsamV</RootNamespace>
-    <AssemblyName>BalsamV</AssemblyName>
+    <RootNamespace>BalsamV.Profile</RootNamespace>
+    <AssemblyName>BalsamV.Profile</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,34 +38,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Exceptions\PackageException.cs" />
-    <Compile Include="Common\Exceptions\VerifierException.cs" />
-    <Compile Include="Common\IVerifiable.cs" />
-    <Compile Include="Common\Module.cs" />
-    <Compile Include="Common\Output.cs" />
-    <Compile Include="Common\Verification.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigurationFactory.cs" />
-    <Compile Include="ConfigurationForger.cs" />
-    <Compile Include="ConfigurationPatcher.cs" />
-    <Compile Include="Lastprof.cs" />
-    <Compile Include="LastprofFactory.cs" />
-    <Compile Include="ProfileException.cs" />
+    <Compile Include="Colour.cs" />
+    <Compile Include="Name.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BalsamV.Input\BalsamV.Input.csproj">
-      <Project>{3c2aa068-d9f4-4fa4-be0a-3c89e0538aaf}</Project>
-      <Name>BalsamV.Input</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalsamV.Profile\BalsamV.Profile.csproj">
-      <Project>{22050973-8d68-4ebe-9372-69e902d70058}</Project>
-      <Name>BalsamV.Profile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalsamV.Settings\BalsamV.Settings.csproj">
-      <Project>{9abf9928-6db7-487a-97e3-c068cc058361}</Project>
-      <Name>BalsamV.Settings</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

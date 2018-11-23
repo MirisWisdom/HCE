@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BalsamV")]
+[assembly: AssemblyTitle("BalmsaV.Input")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BalsamV")]
+[assembly: AssemblyProduct("BalmsaV.Input")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("02665F11-3CDB-472A-8BF8-951B94F544A5")]
+[assembly: Guid("3C2AA068-D9F4-4FA4-BE0A-3C89E0538AAF")]
 
 // Version information for an assembly consists of the following four values:
 //
