@@ -73,6 +73,8 @@ namespace BalsamV.GUI
 
         /// <summary>
         ///     Attempts to auto-detect & load a blam.sav on the file system.
+        ///     Initialisation is done with code directly taken from <see cref="BlamFactory.GetFromSystem"/>,
+        ///     for the purpose of exposing the deduced absolute path of the blam.sav binary.
         /// </summary>
         public void Initialise()
         {
