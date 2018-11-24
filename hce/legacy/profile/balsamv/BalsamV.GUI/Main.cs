@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using BalsamV.GUI.Properties;
@@ -66,6 +68,17 @@ namespace BalsamV.GUI
                 if (value == _canEdit) return;
                 _canEdit = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string Version
+        {
+            get
+            {
+                using (var stream = Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("BalsamV.GUI.Resources.Version.txt"))
+                using (var reader = new StreamReader(stream))
+                    return reader.ReadToEnd().Trim();
             }
         }
 

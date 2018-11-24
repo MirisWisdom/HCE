@@ -67,9 +67,9 @@ namespace BalsamV.GUI
             Process.Start("https://github.com/yumiris/HCE.BalsamV/releases");
         }
 
-        private void Open(object sender, RoutedEventArgs e)
+        private void Version(object sender, RoutedEventArgs e)
         {
-            Process.Start("explorer.exe", $@"/select,{_main.Path}");
+            Process.Start($"https://github.com/yumiris/HCE.BalsamV/releases/{_main.Version}");
         }
     }
 }

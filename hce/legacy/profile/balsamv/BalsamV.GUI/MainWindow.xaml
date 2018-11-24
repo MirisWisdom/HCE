@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BalsamV"
         xmlns:gui="clr-namespace:BalsamV.GUI"
         mc:Ignorable="d"
-        Title="HCE.BalsamV"
+        Title="HCE.BalsamV | Profile Binary Editor"
         Width="640"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
@@ -18,16 +18,19 @@
     </Window.DataContext>
     <StackPanel>
         <Menu>
+            <Menu.Resources>
+                <Style TargetType="{x:Type MenuItem}">
+                    <Setter Property="Height" Value="25" />
+                </Style>
+            </Menu.Resources>
+
             <MenuItem Header="About"
-                      Click="About"
-                      Height="25" />
+                      Click="About" />
             <MenuItem Header="Releases"
-                      Height="25"
                       Click="Releases" />
-            <MenuItem Header="{Binding Path}"
-                      Foreground="#ABADB3"
-                      Height="25"
-                      Click="Open" />
+            <MenuItem Header="{Binding Version}"
+                      Click="Version"
+                      Foreground="#ABADB3" />
         </Menu>
         <Grid Margin="5">
             <Grid.Resources>
@@ -385,5 +388,9 @@
                 </GroupBox>
             </DockPanel>
         </Grid>
+        <Label Content="{Binding Path}"
+               HorizontalAlignment="Center"
+               Foreground="#ABADB3"
+               Margin="0,0,0,5"/>
     </StackPanel>
 </Window>
