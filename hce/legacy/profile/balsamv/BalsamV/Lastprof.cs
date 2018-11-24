@@ -8,12 +8,6 @@ namespace BalsamV
     public class Lastprof
     {
         /// <summary>
-        ///     Name of the last accessed profile.
-        ///     This value is expected to be between 1 and 11 characters.
-        /// </summary>
-        private string _name;
-
-        /// <summary>
         ///     Separation character which is guaranteed to be present.
         /// </summary>
         public const char Delimiter = '\\';
@@ -29,7 +23,13 @@ namespace BalsamV
         public const string Signature = "lam.sav";
 
         /// <summary>
-        ///     <see cref="_name"/>
+        ///     Name of the last accessed profile.
+        ///     This value is expected to be between 1 and 11 characters.
+        /// </summary>
+        private string _name;
+
+        /// <summary>
+        ///     <see cref="_name" />
         /// </summary>
         public string Name
         {

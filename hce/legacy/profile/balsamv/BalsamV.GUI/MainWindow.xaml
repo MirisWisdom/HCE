@@ -18,8 +18,16 @@
     </Window.DataContext>
     <StackPanel>
         <Menu>
-            <MenuItem Header="About" Click="About" />
-            <MenuItem Header="Releases" Click="Releases" />
+            <MenuItem Header="About"
+                      Click="About"
+                      Height="25" />
+            <MenuItem Header="Releases"
+                      Height="25"
+                      Click="Releases" />
+            <MenuItem Header="{Binding Path}"
+                      Foreground="#ABADB3"
+                      Height="25"
+                      Click="Open" />
         </Menu>
         <Grid Margin="5">
             <Grid.Resources>
@@ -28,11 +36,11 @@
                 </Style>
                 <Style TargetType="{x:Type CheckBox}">
                     <Setter Property="Margin" Value="-1,1,0,1" />
-                    <Setter Property="Background" Value="#FFF4F4F4" />
+                    <Setter Property="Background" Value="WhiteSmoke" />
                     <Setter Property="BorderBrush" Value="#ABADB3" />
                 </Style>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4" />
+                    <Setter Property="Background" Value="WhiteSmoke" />
                     <Setter Property="BorderBrush" Value="#ABADB3" />
                 </Style>
                 <Style TargetType="{x:Type Label}">
@@ -41,10 +49,11 @@
                 </Style>
                 <Style TargetType="{x:Type TextBox}">
                     <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Background" Value="#FFF4F4F4" />
+                    <Setter Property="Background" Value="WhiteSmoke" />
                 </Style>
                 <Style TargetType="{x:Type ComboBox}">
                     <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="WhiteSmoke" />
                 </Style>
             </Grid.Resources>
 
@@ -52,7 +61,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
 
             <DockPanel Grid.Column="0">
                 <Image DockPanel.Dock="Top"
