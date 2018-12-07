@@ -1,29 +1,56 @@
+<h1 align="center">Nouveau</h1>
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/10241434/35606096-3170216a-0688-11e8-9372-6f3bf7d3c685.png"/>
+ <br><br>
+ The HCE/SPV3 Official Loader
+ <br><br>
+ <a href="https://github.com/yumiris/Ecran">Ecran Resolution</a>
+ •
+ <a href="https://github.com/yumiris/Echoic">Echoic Library</a>
+ •
+ <a href="https://github.com/yumiris/Eaxir">Eaxir Installer</a>
+</p>
+
+# Repository
+
+Note that this repository serves as a mirror of the currently public code. The upstream code is hosted privately and will be available in this repository once it's ready for release. The commit frequency and the current code you may see here is not a representative of the actual state of development & code, respectively.
+
 # Introduction
+![Screenshot](https://user-images.githubusercontent.com/10241434/35571733-ed4e94a0-060d-11e8-8b65-ec0866fdf9c9.png)
 
-SPV3.Settings is the configuration program used for tweaking SPV3. The program serves as a front-end to configuring:
+This is the official repository for the HCE/SPV3 Nova Loader - now cleaned up, stable, and open source!
 
-- SPV3's video/audio/input settings;
-- environmental sound & hardware acceleration;
-- OpenSauce post-processing options/effects.
+It all started as a small fix for SPV3's booting problems. The fix was two lines of code:
 
-## Development
+```cs
+File.WriteAllBytes(Resources.Eula); // write eula assets
+Process.Start(Resources.HaloCeExe); // start hce process
+```
 
-This section outlines the SPV3 Settings system. SPV3.Settings leverages HCE.BalsamV & SPV3.Shaders for configuring
-SPV3's profile settings & shader preferences, respectively.
+# Features
+> Note: Due to the recent rewriting of the code-base, there has been a regression in features, such as auto-updating and Chimera installation/configuration. Once the rewriting is done, the features will be re-introduced.
 
-![diagram](https://user-images.githubusercontent.com/10241434/49387977-05238300-f75e-11e8-8eba-b8381039861a.png)
+* Installation of the EAX libraries for sound enhancement
+  * Extraction of the EAX library files to the HCE directory
+  * Enabling Hardware Acceleration and Environmental Sound
+* Manipulation of the OpenSauce configurations, including:
+  * Toggles for OpenSauce camera, HUD, shader and post processing options
+  * OpenSauce FoV calculations using a mind-boggling formula by Mortis
+  * HCE launching parameters & video settings (natively and with `-vidmode`)
+* HCE gamepad input-action mapping by manipulating and forging the `blam.sav`
+* Generation of an `initc.txt` configuration on launch
+* Encoding/decoding of the `savegame.bin` for campaign continue mechanism
+  * While at it, additional support on top for SPV3-specific maps
+* Pretty sections for updates, announcements and common error messages
 
-This program is designed to deal with options within the scope of SPV3. It abstracts the generalised routines of the
-various libraries away from the end-user, and exposes only the necessary options that are relevant to SPV3.
+# Contibutors
 
-### Profile Settings
+* [Mortis](https://discord.gg/vu2eYwy) - Consultancy & FOV Calculation formula
+* [Joshua Ezzell](https://joshezzell.artstation.com/) - UI's stunning background images
 
-Configuration of SPV3 profile settings is done using HCE.BalsamV, which is included in this repository in the `lib`
-directory. Rather than launching the BalsamV GUI, SPV3.Settings relies on the library directly for configuring the
-SPV3 profile settings. This is due to the fact that BalsamV is separate from SPV3 in terms of design philosophy.
+# Contributing
 
-### Shader Preferences
+Bug reports and suggestions are always appreciated! Contributing with code is not available to the public, at the moment.
 
-Configuration of post-processing effects is done using SPV3.Shaders, which is also included in this repository.
-SPV3.Settings launches the SPV3.Shaders GUI and instructs it to load the provided `initc.txt` file which SPV3.Settings
-takes care of detecting. 
+# License
+... currently a work in progress...
