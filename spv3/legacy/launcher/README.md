@@ -1,56 +1,37 @@
-<h1 align="center">Nouveau</h1>
+<h1 align="center">SPV3.Launcher</h1>
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/10241434/35606096-3170216a-0688-11e8-9372-6f3bf7d3c685.png"/>
+	<img src="https://user-images.githubusercontent.com/10241434/49625813-02e94f00-fa12-11e8-9c30-cfc578a9a23e.png"/>
  <br><br>
- The HCE/SPV3 Official Loader
+ Source code of the official SPV3.2 Launcher
  <br><br>
- <a href="https://github.com/yumiris/Ecran">Ecran Resolution</a>
+ <a href="https://github.com/yumiris/SPV3.Settings">Settings</a>
  •
- <a href="https://github.com/yumiris/Echoic">Echoic Library</a>
+ <a href="https://github.com/yumiris/SPV3.Loader">Loader</a>
  •
- <a href="https://github.com/yumiris/Eaxir">Eaxir Installer</a>
+ <a href="https://github.com/yumiris/SPV3.Installer">Installer</a>
 </p>
 
-# Repository
-
-Note that this repository serves as a mirror of the currently public code. The upstream code is hosted privately and will be available in this repository once it's ready for release. The commit frequency and the current code you may see here is not a representative of the actual state of development & code, respectively.
-
 # Introduction
-![Screenshot](https://user-images.githubusercontent.com/10241434/35571733-ed4e94a0-060d-11e8-8b65-ec0866fdf9c9.png)
 
-This is the official repository for the HCE/SPV3 Nova Loader - now cleaned up, stable, and open source!
+This repository contains the source code for the SPV3.2 Launcher and its components. Currently, the codebase is
+undergoing a significant rewrite to ensure that robustness, maintainability & modularity is significantly improved.
 
-It all started as a small fix for SPV3's booting problems. The fix was two lines of code:
+The commits for the previous SPV3 loader revisions are present within this repository's history, for preservation
+purposes.
 
-```cs
-File.WriteAllBytes(Resources.Eula); // write eula assets
-Process.Start(Resources.HaloCeExe); // start hce process
-```
+# Components
 
-# Features
-> Note: Due to the recent rewriting of the code-base, there has been a regression in features, such as auto-updating and Chimera installation/configuration. Once the rewriting is done, the features will be re-introduced.
+This section outlines the major components used by the SPV3 Launcher. The components have their own dedicated
+repositories; however, adapted copies of them are present in the `lib` directory.
 
-* Installation of the EAX libraries for sound enhancement
-  * Extraction of the EAX library files to the HCE directory
-  * Enabling Hardware Acceleration and Environmental Sound
-* Manipulation of the OpenSauce configurations, including:
-  * Toggles for OpenSauce camera, HUD, shader and post processing options
-  * OpenSauce FoV calculations using a mind-boggling formula by Mortis
-  * HCE launching parameters & video settings (natively and with `-vidmode`)
-* HCE gamepad input-action mapping by manipulating and forging the `blam.sav`
-* Generation of an `initc.txt` configuration on launch
-* Encoding/decoding of the `savegame.bin` for campaign continue mechanism
-  * While at it, additional support on top for SPV3-specific maps
-* Pretty sections for updates, announcements and common error messages
+- [**SPV3.Loader**](https://github.com/yumiris/SPV3.Loader): Wrapper around the HCE executable for extending the loading
+  procedure.
+- [**SPV3.Settings**](https://github.com/yumiris/SPV3.Settings): Configuration program for SPV3.
+- [**SPV3.Shaders**](https://github.com/yumiris/SPV3.Shaders): Shader specification & configuration program for SPV3.
+- [**SPV3.Installer**](https://github.com/yumiris/SPV3.Installer): Installation source code & specification for SPV3.
 
-# Contibutors
+# Attributions
 
-* [Mortis](https://discord.gg/vu2eYwy) - Consultancy & FOV Calculation formula
-* [Joshua Ezzell](https://joshezzell.artstation.com/) - UI's stunning background images
-
-# Contributing
-
-Bug reports and suggestions are always appreciated! Contributing with code is not available to the public, at the moment.
-
-# License
-... currently a work in progress...
+* [**Mortis**](https://discord.gg/vu2eYwy) for consultancy & FOV calculation formula;
+* [**Joshua Ezzell**](https://joshezzell.artstation.com/) for the UI's stunning background images;
+* [**SbdJazz**](https://github.com/SubhadeepJasu) for the concept UIs & shader implementations.
