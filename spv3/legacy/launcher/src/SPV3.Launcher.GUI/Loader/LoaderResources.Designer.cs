@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Nova.UI.Properties {
-    using System;
-    
-    
+namespace SPV3.Launcher.GUI.Loader {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,14 +19,14 @@ namespace Nova.UI.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class LoaderResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal LoaderResources() {
         }
         
         /// <summary>
@@ -39,7 +36,7 @@ namespace Nova.UI.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nova.UI.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nova.UI.Loader.LoaderResources", typeof(LoaderResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +58,74 @@ namespace Nova.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to d3d9.dll.
+        /// </summary>
+        public static string D3d9Dll {
+            get {
+                return ResourceManager.GetString("D3d9Dll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to d3d9.ini.
+        /// </summary>
+        public static string D3d9Ini {
+            get {
+                return ResourceManager.GetString("D3d9Ini", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The SPV3.2 Official Loader.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to haloce.exe.
         /// </summary>
-        public static string HceName {
+        public static string HaloExecutable {
             get {
-                return ResourceManager.GetString("HceName", resourceCulture);
+                return ResourceManager.GetString("HaloExecutable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to haloce.
+        /// </summary>
+        public static string HaloProcess {
+            get {
+                return ResourceManager.GetString("HaloProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to reshade-shaders.
+        /// </summary>
+        public static string ShadersDirectory {
+            get {
+                return ResourceManager.GetString("ShadersDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SPV3.2.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3.2.0.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
     }

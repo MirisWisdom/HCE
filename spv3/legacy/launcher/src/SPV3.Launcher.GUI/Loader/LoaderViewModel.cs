@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using SPV3.Loader;
 
-namespace Nova.UI.Loader
+namespace SPV3.Launcher.GUI.Loader
 {
     public class LoaderViewModel : INotifyPropertyChanged
     {

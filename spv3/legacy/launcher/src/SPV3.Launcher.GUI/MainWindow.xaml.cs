@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Nova.UI
+namespace SPV3.Launcher.GUI
 {
     /// <summary>
     ///     Class containing code that handles this UI.

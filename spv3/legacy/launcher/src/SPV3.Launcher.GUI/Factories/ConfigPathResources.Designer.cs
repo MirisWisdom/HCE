@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Nova.UI.Factories {
-    using System;
-    
-    
+namespace SPV3.Launcher.GUI.Factories {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

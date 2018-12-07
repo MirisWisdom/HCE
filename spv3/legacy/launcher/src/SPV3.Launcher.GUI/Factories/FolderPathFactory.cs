@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Nova.UI.Factories
+namespace SPV3.Launcher.GUI.Factories
 {
     public sealed class FolderPathFactory
     {

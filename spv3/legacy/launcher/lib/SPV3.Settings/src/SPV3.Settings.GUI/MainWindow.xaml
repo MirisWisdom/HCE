@@ -16,10 +16,10 @@
         <Button Margin="5"
                 Padding="5"
                 Content="Configure HCE Settings"
-                Click="HceSettings"/>
+                Click="HceSettings" />
         <Button Margin="5"
                 Padding="5"
                 Content="Configure SPV3 Shaders"
-                Click="Spv3Shaders"/>
+                Click="Spv3Shaders" />
     </StackPanel>
 </Window>

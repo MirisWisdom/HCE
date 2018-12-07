@@ -391,6 +391,6 @@
         <Label Content="{Binding Path}"
                HorizontalAlignment="Center"
                Foreground="#ABADB3"
-               Margin="0,0,0,5"/>
+               Margin="0,0,0,5" />
     </StackPanel>
 </Window>

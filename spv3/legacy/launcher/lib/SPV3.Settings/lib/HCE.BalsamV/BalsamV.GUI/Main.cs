@@ -78,7 +78,9 @@ namespace BalsamV.GUI
                 using (var stream = Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream("BalsamV.GUI.Resources.Version.txt"))
                 using (var reader = new StreamReader(stream))
+                {
                     return reader.ReadToEnd().Trim();
+                }
             }
         }
 

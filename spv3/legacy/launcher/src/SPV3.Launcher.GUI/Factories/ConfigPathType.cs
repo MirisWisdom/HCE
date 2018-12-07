@@ -1,4 +1,4 @@
-﻿namespace Nova.UI.Factories
+﻿namespace SPV3.Launcher.GUI.Factories
 {
     public enum ConfigPathType
     {

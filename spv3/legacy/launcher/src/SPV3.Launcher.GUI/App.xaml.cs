@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Nova.UI
+namespace SPV3.Launcher.GUI
 {
     /// <summary>
     ///     Interaction logic for App.xaml

@@ -17,13 +17,6 @@ namespace SPV3.Shaders
         private const int UpperBound = 0x4000;
 
         /// <summary>
-        ///     Integer representation for a shader state.
-        ///     The value is expected to represent a valid shader state, as specified in the doc/global-variable.md
-        ///     document.
-        /// </summary>
-        public int Value { get; }
-
-        /// <summary>
         ///     State constructor.
         /// </summary>
         /// <param name="value">
@@ -40,5 +33,12 @@ namespace SPV3.Shaders
 
             Value = value;
         }
+
+        /// <summary>
+        ///     Integer representation for a shader state.
+        ///     The value is expected to represent a valid shader state, as specified in the doc/global-variable.md
+        ///     document.
+        /// </summary>
+        public int Value { get; }
     }
 }

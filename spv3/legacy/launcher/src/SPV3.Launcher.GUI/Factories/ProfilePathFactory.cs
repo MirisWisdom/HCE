@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace Nova.UI.Factories
+namespace SPV3.Launcher.GUI.Factories
 {
     public sealed class ProfilePathFactory
     {

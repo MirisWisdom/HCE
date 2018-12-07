@@ -1,6 +1,6 @@
 using SPV3.Loader;
 
-namespace Nova.UI
+namespace SPV3.Launcher.GUI
 {
     /// <summary>
     ///     Main model used by the SPV3.2 Launcher.

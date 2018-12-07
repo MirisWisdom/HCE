@@ -21,11 +21,6 @@ namespace SPV3.Shaders
         private const int UpperBound = 0x4AA4;
 
         /// <summary>
-        ///     Encoded Configuration value. Please refer to the doc/global-variable.md documentation for information.
-        /// </summary>
-        public int Value { get; }
-
-        /// <summary>
         ///     Representation constructor.
         /// </summary>
         /// <param name="value">
@@ -41,5 +36,10 @@ namespace SPV3.Shaders
 
             Value = value;
         }
+
+        /// <summary>
+        ///     Encoded Configuration value. Please refer to the doc/global-variable.md documentation for information.
+        /// </summary>
+        public int Value { get; }
     }
 }
