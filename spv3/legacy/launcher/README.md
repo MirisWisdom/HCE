@@ -21,6 +21,8 @@ purposes.
 
 # Components
 
+![hierarchy](https://user-images.githubusercontent.com/10241434/49678570-236fe280-fac0-11e8-923d-5d8f383d453c.png)
+
 This section outlines the major components used by the SPV3 Launcher. The components have their own dedicated
 repositories; however, adapted copies of them are present in the `lib` directory.
 
