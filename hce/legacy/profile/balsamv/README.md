@@ -49,11 +49,11 @@ Considering that the `blam.sav` binary contains a lot of properties, the BalsamV
 split up into three categories. Refer to the following development documentation for information on the various sections
 `blam.sav` binary:
 
-| Document                                         | Topics                                   |
-| ------------------------------------------------ | ---------------------------------------- |
-| [BalsamV.Profile](./BalsamV.Profile/README.md)   | Profile name and player colour.          |
-| [BalsamV.Settings](./BalsamV.Settings/README.md) | Video, audio and network settings.       |
-| [BalsamV.Input](./BalsamV.Input/README.md)       | Keyboard, mouse and controller mappings. |
+| Document                              | Topics                                   |
+| ------------------------------------- | ---------------------------------------- |
+| [BalsamV.Profile](./doc/profile.md)   | Profile name and player colour.          |
+| [BalsamV.Settings](./doc/settings.md) | Video, audio and network settings.       |
+| [BalsamV.Input](./doc/input.md)       | Keyboard, mouse and controller mappings. |
 
 ## Profile
 
