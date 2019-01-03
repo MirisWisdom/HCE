@@ -28,5 +28,10 @@ namespace SPV3.Loader
         ///     Skips verification of the provided HCE executable.
         /// </summary>
         public bool SkipVerification { get; set; }
+        
+        /// <summary>
+        ///     Skips campaign progress update routine.
+        /// </summary>
+        public bool SkipResume { get; set; }
     }
 }

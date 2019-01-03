@@ -20,6 +20,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security;
+using HCE.BalsamV;
+using SPV3.Resume;
 
 namespace SPV3.Loader
 {
@@ -45,7 +48,7 @@ namespace SPV3.Loader
         }
 
         /// <summary>
-        ///     Starts up the inbound executable with the loader configuration specified in the constructor.
+        ///     Public wrapper for the executable invocation and campaign progress update. 
         /// </summary>
         /// <param name="executable">
         ///     Executable-type instance representing the HCE executable to load.
@@ -53,20 +56,61 @@ namespace SPV3.Loader
         /// <param name="parameters">
         ///     Optional parameters used for initialising the HCE executable process.
         /// </param>
-        /// <exception cref="ArgumentException">
-        ///     Provided executable failed to pass the verification routine.
+        public void Start(Executable executable, Parameters parameters = null)
+        {
+            HandleCheckpoint();
+            InvokeExecutable(executable, parameters);
+        }
+
+        /// <summary>
+        ///     Updates the initc.txt in the current directory with the detected profile's campaign progress.
+        /// </summary>
+        private void HandleCheckpoint()
+        {
+            if (_configuration.SkipResume)
+                return;
+
+            /**
+             * Loader is assumed to be running from the working directory, where both the executable & initc reside in.
+             */
+            var initc = new Initc((SPV3.Domain.File) "initc.txt");
+
+            /**
+             * Savegame binary ends up being the one detected on the filesystem.
+             * Detection is implicitly done by attempting to figure out the profile's name.
+             */
+            var saveName = LastprofFactory.DetectOnSystem().Name;
+            var personal = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var gamesHce = Path.Combine("My Games", "Halo CE");
+            var savePath = Path.Combine(personal, gamesHce, "savegames", saveName, "savegame.bin");
+            var saveGame = new Savegame((SPV3.Domain.File) savePath);
+
+            initc.Save(saveGame.Load());
+        }
+
+        /// <summary>
+        ///     Invokes the inbound executable as a process, with the inbound parameters. Pre-invocation verification
+        ///     will be conducted, unless set to skip in the configuration.
+        /// </summary>
+        /// <param name="executable">
+        ///     HCE executable to verify and invoke.
+        /// </param>
+        /// <param name="parameters">
+        ///     Parameters for the start-up process.
+        /// </param>
+        /// <exception cref="SecurityException">
+        ///     Executable failed to pass the verification routine.
         /// </exception>
         /// <exception cref="FormatException">
         ///     Could not infer executable name from the path.
-        /// </exception>
-        /// <exception cref="FormatException">
+        ///     - or -
         ///     Could not infer working directory from the path.
         /// </exception>
-        public void Start(Executable executable, Parameters parameters = null)
+        private void InvokeExecutable(Executable executable, Parameters parameters)
         {
             if (!_configuration.SkipVerification)
                 if (!executable.Verify())
-                    throw new ArgumentException("Executable failed to pass the verification routine.");
+                    throw new SecurityException("Executable failed to pass the verification routine.");
 
             var exeName = Path.GetFileName(executable.Path) ??
                           throw new FormatException("Could not infer executable name from the path.");
