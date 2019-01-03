@@ -1,9 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{B6861B3A-F9C8-45C1-9AE9-F58FCF0401D7}"
-ProjectSection(SolutionItems) = preProject
-	README.md = README.md
-EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalsamV.GUI", "BalsamV.GUI\BalsamV.GUI.csproj", "{04E18997-5D28-42AD-A503-6AC2CF9AC342}"
 EndProject
