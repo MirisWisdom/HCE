@@ -20,7 +20,7 @@ The additional functionality, at the moment, includes:
 - detection of the HCE executable's path;
 - verification of the HCE executable's validity;
 
-# CLI Usage
+## CLI Usage
 
 ```powershell
 # Implicit detection of HCE executable
