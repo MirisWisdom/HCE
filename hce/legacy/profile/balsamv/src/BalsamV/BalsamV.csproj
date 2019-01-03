@@ -42,23 +42,25 @@
     <Compile Include="BlamFactory.cs" />
     <Compile Include="BlamForger.cs" />
     <Compile Include="BlamPatcher.cs" />
+    <Compile Include="Input\Mouse.cs" />
+    <Compile Include="Input\Sensitivity.cs" />
     <Compile Include="Lastprof.cs" />
     <Compile Include="LastprofFactory.cs" />
+    <Compile Include="Profile\Colour.cs" />
+    <Compile Include="Profile\Name.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BalsamV.Input\BalsamV.Input.csproj">
-      <Project>{3c2aa068-d9f4-4fa4-be0a-3c89e0538aaf}</Project>
-      <Name>BalsamV.Input</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalsamV.Profile\BalsamV.Profile.csproj">
-      <Project>{22050973-8d68-4ebe-9372-69e902d70058}</Project>
-      <Name>BalsamV.Profile</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BalsamV.Settings\BalsamV.Settings.csproj">
-      <Project>{9abf9928-6db7-487a-97e3-c068cc058361}</Project>
-      <Name>BalsamV.Settings</Name>
-    </ProjectReference>
+    <Compile Include="Settings\Audio.cs" />
+    <Compile Include="Settings\Connection.cs" />
+    <Compile Include="Settings\Effects.cs" />
+    <Compile Include="Settings\FrameRate.cs" />
+    <Compile Include="Settings\Network.cs" />
+    <Compile Include="Settings\Particles.cs" />
+    <Compile Include="Settings\Port.cs" />
+    <Compile Include="Settings\Quality.cs" />
+    <Compile Include="Settings\RefreshRate.cs" />
+    <Compile Include="Settings\Resolution.cs" />
+    <Compile Include="Settings\Video.cs" />
+    <Compile Include="Settings\Volume.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
