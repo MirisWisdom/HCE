@@ -18,12 +18,14 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Security;
 using HCE.BalsamV;
 using SPV3.Domain;
 using SPV3.Resume;
+using File = SPV3.Domain.File;
 
 namespace SPV3.Loader
 {
@@ -58,7 +60,7 @@ namespace SPV3.Loader
         }
 
         /// <summary>
-        ///     Public wrapper for the executable invocation and campaign progress update. 
+        ///     Public wrapper for the executable invocation and campaign progress update.
         /// </summary>
         /// <param name="executable">
         ///     Executable-type instance representing the HCE executable to load.
@@ -71,13 +73,65 @@ namespace SPV3.Loader
             Notify("============================");
             Notify("Initiated loading routine...");
             Notify("============================");
-            
+
             HandleCheckpoint();
+            VerifyDataAssets();
             InvokeExecutable(executable, parameters);
 
             Notify("============================");
             Notify("Completed loading routine...");
             Notify("============================");
+        }
+
+        private void VerifyDataAssets()
+        {
+            Notify("----------------------------");
+            Notify("Initiated maps data check...");
+            Notify("----------------------------");
+
+            IEnumerable<Entry> GetMaps()
+            {
+                var manifest = new ManifestRepository((File) "0x00.bin").Load();
+                var packages = manifest.Packages;
+
+                foreach (var package in packages)
+                {
+                    if (package.Directory == null) continue;
+                    if (package.Directory.Name == "maps")
+                        return package.Entries;
+                }
+
+                throw new NullReferenceException("No maps package found in the manifest.");
+            }
+
+            foreach (var map in GetMaps())
+            {
+                var mapFile = Path.Combine("maps", map.Name);
+                var mapName = (string) map.Name;
+                var mapSize = (int) map.Size;
+
+                var padding = new string(' ', 32 - mapName.Length);
+
+                if (System.IO.File.Exists(mapFile))
+                {
+                    Notify($"Checking {mapName} {padding} <= FILE SIZE " + mapSize);
+
+                    var fileSize = new FileInfo(mapFile).Length;
+
+                    Notify(fileSize == map.Size
+                        ? $"Verified {mapName} {padding} <= AUTHENTIC " + mapSize
+                        : $"Mismatch {mapName} {padding} <= INCORRECT " + mapSize + " != " + fileSize
+                    );
+                }
+                else
+                {
+                    Notify($"Skipping {mapName} {padding} <= NOT EXIST");
+                }
+            }
+
+            Notify("----------------------------");
+            Notify("Completed maps data check...");
+            Notify("----------------------------");
         }
 
         /// <summary>
@@ -87,7 +141,7 @@ namespace SPV3.Loader
         {
             if (_configuration.SkipResume)
                 return;
-            
+
             Notify("----------------------------");
             Notify("Initiated progress handle...");
             Notify("----------------------------");
@@ -96,7 +150,7 @@ namespace SPV3.Loader
              * Loader is assumed to be running from the working directory, where both the executable & initc reside in.
              */
             Notify("Infer init in working dir...");
-            var initc = new Initc((Domain.File) "initc.txt");
+            var initc = new Initc((File) "initc.txt");
 
             /**
              * Savegame binary ends up being the one detected on the filesystem.
@@ -119,10 +173,10 @@ namespace SPV3.Loader
             var personal = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var gamesHce = Path.Combine("My Games", "Halo CE");
             var savePath = Path.Combine(personal, gamesHce, "savegames", saveName, "savegame.bin");
-            var saveGame = new Savegame((Domain.File) savePath);
+            var saveGame = new Savegame((File) savePath);
 
             Progress progress;
-            
+
             try
             {
                 Notify("Infer saved progress data...");
@@ -210,7 +264,7 @@ namespace SPV3.Loader
         ///     Invokes IStatus.CommitStatus() with inbound data.
         /// </summary>
         /// <param name="data">
-        ///    Data to output to the IStatus object.
+        ///     Data to output to the IStatus object.
         /// </param>
         private void Notify(string data)
         {
