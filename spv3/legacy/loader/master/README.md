@@ -2,23 +2,23 @@
     <h1 align="center">
         SPV3.Loader
     </h1>
-    <h3 align="center">
-        Source for the SPV3 loader
-    </h3>
+    <p align="center">
+        Loading of the SPV3 mod & resuming of the campaign 
+    </p>
 </html>
 
 # Introduction
 
 This repository contains the source & documentation for SPV3.Loader.
 
-The loader is a wrapper for the HCE executable. It extends the loading
-procedure whilst accepting the same startup parameters as the HCE
-executable.
+The loader is a wrapper for the HCE executable. It extends the loading procedure
+whilst accepting the same start-up parameters as the HCE executable.
 
 The additional functionality, at the moment, includes:
 
 - detection of the HCE executable's path;
 - verification of the HCE executable's validity;
+- checkpoint resuming of the SPV3 campaign;
 
 ## CLI Usage
 
@@ -32,5 +32,6 @@ The additional functionality, at the moment, includes:
 
 ## Documentation
 
+- [Loading Procedure](doc/loading.md)
 - [Startup Parameters](doc/parameters.md)
 - [Executable Detection](doc/detection.md)
