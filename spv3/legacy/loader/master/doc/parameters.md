@@ -1,6 +1,6 @@
 # Startup Arguments
 
-This document outlines the startup parameters that the HCE executable supports.
+This document outlines the start-up parameters that the HCE executable supports.
 This document classifies the parameters by two types:
 
 - **toggle**: parameters whose mere presence enable a certain functionality
@@ -60,7 +60,7 @@ parameters, with the following notes to consider:
 
 The type exposes a `string Serialise()` method. It retrieves the instance's
 property values as a concatenated string, which is accepted by the HCE process
-as a startup argument. For example:
+as a start-up argument. For example:
 
 ```cs
 var parameters = new ExecutableParameters

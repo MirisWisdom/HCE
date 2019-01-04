@@ -11,9 +11,8 @@
 
 This repository contains the source & documentation for SPV3.Loader.
 
-The loader is a wrapper for the HCE executable. It extends the loading
-procedure whilst accepting the same startup parameters as the HCE
-executable.
+The loader is a wrapper for the HCE executable. It extends the loading procedure
+whilst accepting the same start-up parameters as the HCE executable.
 
 The additional functionality, at the moment, includes:
 
@@ -33,5 +32,6 @@ The additional functionality, at the moment, includes:
 
 ## Documentation
 
+- [Loading Procedure](doc/loading.md)
 - [Startup Parameters](doc/parameters.md)
 - [Executable Detection](doc/detection.md)
