@@ -2,9 +2,9 @@
     <h1 align="center">
         SPV3.Loader
     </h1>
-    <h3 align="center">
-        Source for the SPV3 loader
-    </h3>
+    <p align="center">
+        Loading of the SPV3 mod & resuming of the campaign 
+    </p>
 </html>
 
 # Introduction
