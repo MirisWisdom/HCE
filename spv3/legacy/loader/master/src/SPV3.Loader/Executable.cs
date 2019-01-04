@@ -32,7 +32,7 @@ namespace SPV3.Loader
         public const string Name = "haloce.exe";
 
         /// <summary>
-        ///     Byte length of the HCE executable. 
+        ///     Byte length of the HCE executable.
         /// </summary>
         private const int Length = 0x24B000;
 

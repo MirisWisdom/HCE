@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Security;
 using System.Threading.Tasks;
 
 namespace SPV3.Loader.CLI
@@ -31,41 +32,38 @@ namespace SPV3.Loader.CLI
 
             try
             {
-                if (args.Length == 0)
+                Task.Run(() =>
                 {
-                    loader.Start(ExecutableFactory.Detect());
-                    return;
-                }
-
-                try
-                {
-                    Task.Run(() =>
+                    /**
+                     * Implicitly detect the HCE executable and start it without any parameters.
+                     */
+                    if (args.Length == 0)
                     {
-                        /**
-                         * The parameters are expected to be the HCE ones, e.g. `-window`, `-safemode`, etc.
-                         * This effectively makes the SPV3 Loader a wrapper around the HCE executable. 
-                         */
-                        var parameters = new ParametersParser().Parse(string.Join(" ", args));
+                        loader.Start(ExecutableFactory.Detect());
+                        return;
+                    }
 
-                        /**
-                         * This allows explicit declaration of the path which the HCE executable resides in.
-                         * If the path isn't declared, then we implicitly attempt to detect the executable.
-                         */
-                        var executable = args[0].Contains(Executable.Name)
-                            ? new Executable(args[0])
-                            : ExecutableFactory.Detect();
+                    /**
+                     * The parameters are expected to be the HCE ones, e.g. `-window`, `-safemode`, etc.
+                     * This effectively makes the SPV3 Loader a wrapper around the HCE executable. 
+                     */
+                    var parameters = new ParametersParser().Parse(string.Join(" ", args));
 
-                        loader.Start(executable, parameters);
-                    }).GetAwaiter().GetResult();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception.ToString());
-                }
+                    /**
+                     * This allows explicit declaration of the path which the HCE executable resides in.
+                     * If the path isn't declared, then we implicitly attempt to detect the executable.
+                     */
+                    var executable = args[0].Contains(Executable.Name)
+                        ? new Executable(args[0])
+                        : ExecutableFactory.Detect();
+
+                    loader.Start(executable, parameters);
+                }).GetAwaiter().GetResult();
             }
-            catch (Exception e)
+            catch (SecurityException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.ToString());
+                Environment.Exit(1);
             }
         }
     }

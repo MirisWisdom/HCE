@@ -1,11 +1,21 @@
 # Loading Procedure
 
-The loader conducts three routines upon invocation, all of which are outlined
+The loader conducts four routines upon invocation, all of which are outlined
 here.
+
+## Maps Verification
+
+This step compares the lengths (sizes) of the maps on the filesystem against
+the maps in the maps directory. It also implicitly checks for their existence.
+
+The maps are checked are the ones that are defined in the manifest binary. If
+a map does not exist or its size mismatches the one defined in the manifest,
+then a `FileNotFound` or `Security` exception will be thrown, respectively.
 
 ## Progress Resolving
 
-The first one is determining the player's progress in the campaign.
+This step determines the player's progress in the campaign, to allow the
+resuming of it. HCE does not handle this natively, hence this is needed.
 
 This is done by:
 
@@ -26,6 +36,9 @@ be thrown. If the CLI is used, then the program will quit.
 
 ## Executable Initiation
 
-If the verification passes, then the provided/[detected](detection.md)
+If the verifications pass, then the provided/[detected](detection.md)
 executable will start up. Any arguments passed to the library or the CLI will be
 (serialised and) passed to the executable.
+
+If the maps or executable verification fails, then the execution of SPV3 will be
+aborted to prevent further errors.

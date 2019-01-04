@@ -128,7 +128,7 @@ namespace SPV3.Loader
                 var padding = new string(' ', 32 - mapName.Length);
 
                 /**
-                 * 
+                 * Checks the existence & sizes for the length.
                  */
                 if (System.IO.File.Exists(mapFile))
                 {
