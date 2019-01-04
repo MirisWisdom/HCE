@@ -17,7 +17,8 @@
  * along with SPV3.Loader.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-﻿using System;
+using System;
+using System.Threading.Tasks;
 
 namespace SPV3.Loader.CLI
 {
@@ -26,7 +27,7 @@ namespace SPV3.Loader.CLI
         public static void Main(string[] args)
         {
             var config = new LoaderConfiguration();
-            var loader = new Loader(config);
+            var loader = new Loader(config, new StatusOutput());
 
             try
             {
@@ -36,21 +37,31 @@ namespace SPV3.Loader.CLI
                     return;
                 }
 
-                /**
-                 * The parameters are expected to be the HCE ones, e.g. `-window`, `-safemode`, etc.
-                 * This effectively makes the SPV3 Loader a wrapper around the HCE executable. 
-                 */
-                var parameters = new ParametersParser().Parse(string.Join(" ", args));
+                try
+                {
+                    Task.Run(() =>
+                    {
+                        /**
+                         * The parameters are expected to be the HCE ones, e.g. `-window`, `-safemode`, etc.
+                         * This effectively makes the SPV3 Loader a wrapper around the HCE executable. 
+                         */
+                        var parameters = new ParametersParser().Parse(string.Join(" ", args));
 
-                /**
-                 * This allows explicit declaration of the path which the HCE executable resides in.
-                 * If the path isn't declared, then we implicitly attempt to detect the executable.
-                 */
-                var executable = args[0].Contains(Executable.Name)
-                    ? new Executable(args[0])
-                    : ExecutableFactory.Detect();
+                        /**
+                         * This allows explicit declaration of the path which the HCE executable resides in.
+                         * If the path isn't declared, then we implicitly attempt to detect the executable.
+                         */
+                        var executable = args[0].Contains(Executable.Name)
+                            ? new Executable(args[0])
+                            : ExecutableFactory.Detect();
 
-                loader.Start(executable, parameters);
+                        loader.Start(executable, parameters);
+                    }).GetAwaiter().GetResult();
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.ToString());
+                }
             }
             catch (Exception e)
             {

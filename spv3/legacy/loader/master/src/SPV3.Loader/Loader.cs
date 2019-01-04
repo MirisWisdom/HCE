@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security;
 using HCE.BalsamV;
+using SPV3.Domain;
 using SPV3.Resume;
 
 namespace SPV3.Loader
@@ -37,14 +38,23 @@ namespace SPV3.Loader
         private readonly LoaderConfiguration _configuration;
 
         /// <summary>
+        ///     Optional IStatus object for outputting loading data to.
+        /// </summary>
+        private readonly IStatus _status;
+
+        /// <summary>
         ///     Loader constructor.
         /// </summary>
         /// <param name="configuration">
-        ///     <see cref="_configuration" />
+        ///     Configuration used for the executable loading routine.
         /// </param>
-        public Loader(LoaderConfiguration configuration)
+        /// <param name="status">
+        ///     Optional IStatus object for outputting loading data to.
+        /// </param>
+        public Loader(LoaderConfiguration configuration, IStatus status = null)
         {
             _configuration = configuration;
+            _status = status;
         }
 
         /// <summary>
@@ -58,8 +68,16 @@ namespace SPV3.Loader
         /// </param>
         public void Start(Executable executable, Parameters parameters = null)
         {
+            Notify("============================");
+            Notify("Initiated loading routine...");
+            Notify("============================");
+            
             HandleCheckpoint();
             InvokeExecutable(executable, parameters);
+
+            Notify("============================");
+            Notify("Completed loading routine...");
+            Notify("============================");
         }
 
         /// <summary>
@@ -69,23 +87,61 @@ namespace SPV3.Loader
         {
             if (_configuration.SkipResume)
                 return;
+            
+            Notify("----------------------------");
+            Notify("Initiated progress handle...");
+            Notify("----------------------------");
 
             /**
              * Loader is assumed to be running from the working directory, where both the executable & initc reside in.
              */
-            var initc = new Initc((SPV3.Domain.File) "initc.txt");
+            Notify("Infer init in working dir...");
+            var initc = new Initc((Domain.File) "initc.txt");
 
             /**
              * Savegame binary ends up being the one detected on the filesystem.
              * Detection is implicitly done by attempting to figure out the profile's name.
              */
-            var saveName = LastprofFactory.DetectOnSystem().Name;
+            Notify("Infer savegame in profile...");
+            string saveName;
+
+            try
+            {
+                saveName = LastprofFactory.DetectOnSystem().Name;
+            }
+            catch (FileNotFoundException)
+            {
+                Notify("Could not resolve profile...");
+                Notify("Assuming fresh initiation...");
+                return;
+            }
+
             var personal = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var gamesHce = Path.Combine("My Games", "Halo CE");
             var savePath = Path.Combine(personal, gamesHce, "savegames", saveName, "savegame.bin");
-            var saveGame = new Savegame((SPV3.Domain.File) savePath);
+            var saveGame = new Savegame((Domain.File) savePath);
 
-            initc.Save(saveGame.Load());
+            Progress progress;
+            
+            try
+            {
+                Notify("Infer saved progress data...");
+                progress = saveGame.Load();
+            }
+            catch (ArgumentException)
+            {
+                Notify("Could not decode the data...");
+                Notify("Assuming fresh checkpoint...");
+                Notify("Will skip checkpoint commit!");
+                return;
+            }
+
+            Notify("Commit checkpoint to init...");
+            initc.Save(progress);
+
+            Notify("----------------------------");
+            Notify("Completed progress handle...");
+            Notify("----------------------------");
         }
 
         /// <summary>
@@ -108,9 +164,20 @@ namespace SPV3.Loader
         /// </exception>
         private void InvokeExecutable(Executable executable, Parameters parameters)
         {
+            Notify("----------------------------");
+            Notify("Initiated game invocation...");
+            Notify("----------------------------");
+
             if (!_configuration.SkipVerification)
+            {
+                Notify("Verifying Halo executable...");
+
                 if (!executable.Verify())
                     throw new SecurityException("Executable failed to pass the verification routine.");
+
+                Notify("Executable verifying passed!");
+            }
+
 
             var exeName = Path.GetFileName(executable.Path) ??
                           throw new FormatException("Could not infer executable name from the path.");
@@ -118,10 +185,12 @@ namespace SPV3.Loader
             var workDir = Path.GetDirectoryName(executable.Path) ??
                           throw new FormatException("Could not infer working directory from the path.");
 
+            Notify("Parsing inbound arguments...");
             var exeArgs = parameters == null
                 ? string.Empty
                 : new ParametersSerialiser().Serialise(parameters);
 
+            Notify("Attempting to execute HCE...");
             new Process
             {
                 StartInfo =
@@ -131,6 +200,21 @@ namespace SPV3.Loader
                     Arguments = exeArgs
                 }
             }.Start();
+
+            Notify("----------------------------");
+            Notify("Completed game invocation...");
+            Notify("----------------------------");
+        }
+
+        /// <summary>
+        ///     Invokes IStatus.CommitStatus() with inbound data.
+        /// </summary>
+        /// <param name="data">
+        ///    Data to output to the IStatus object.
+        /// </param>
+        private void Notify(string data)
+        {
+            _status?.CommitStatus(data);
         }
     }
 }

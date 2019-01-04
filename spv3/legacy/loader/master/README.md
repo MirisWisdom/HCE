@@ -19,6 +19,7 @@ The additional functionality, at the moment, includes:
 
 - detection of the HCE executable's path;
 - verification of the HCE executable's validity;
+- checkpoint resuming of the SPV3 campaign;
 
 ## CLI Usage
 
