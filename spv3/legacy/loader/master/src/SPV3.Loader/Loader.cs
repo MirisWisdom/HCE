@@ -60,7 +60,7 @@ namespace SPV3.Loader
         }
 
         /// <summary>
-        ///     Public wrapper for the executable invocation and campaign progress update.
+        ///     Public wrapper for the executable invocation, data verification, and and campaign progress update.
         /// </summary>
         /// <param name="executable">
         ///     Executable-type instance representing the HCE executable to load.
@@ -74,8 +74,8 @@ namespace SPV3.Loader
             Notify("Initiated loading routine...");
             Notify("============================");
 
+            VerifyMapLengths();
             HandleCheckpoint();
-            VerifyDataAssets();
             InvokeExecutable(executable, parameters);
 
             Notify("============================");
@@ -83,7 +83,19 @@ namespace SPV3.Loader
             Notify("============================");
         }
 
-        private void VerifyDataAssets()
+        /// <summary>
+        ///     Verifies the map lengths by comparing them to the lengths defined in the manifest.
+        /// </summary>
+        /// <exception cref="NullReferenceException">
+        ///     Maps package not found in the manifest.
+        /// </exception>
+        /// <exception cref="SecurityException">
+        ///     Map length mismatches the expected one.
+        /// </exception>
+        /// <exception cref="FileNotFoundException">
+        ///     Map does not exist in the maps folder.
+        /// </exception>
+        private void VerifyMapLengths()
         {
             Notify("----------------------------");
             Notify("Initiated maps data check...");
@@ -91,7 +103,7 @@ namespace SPV3.Loader
 
             IEnumerable<Entry> GetMaps()
             {
-                var manifest = new ManifestRepository((File) "0x00.bin").Load();
+                var manifest = new ManifestRepository((File) Manifest.Name.Value).Load();
                 var packages = manifest.Packages;
 
                 foreach (var package in packages)
@@ -110,22 +122,26 @@ namespace SPV3.Loader
                 var mapName = (string) map.Name;
                 var mapSize = (int) map.Size;
 
+                /**
+                 * Makes the output more symmetrical, to satisfy the Yumi.
+                 */
                 var padding = new string(' ', 32 - mapName.Length);
 
+                /**
+                 * 
+                 */
                 if (System.IO.File.Exists(mapFile))
                 {
-                    Notify($"Checking {mapName} {padding} <= FILE SIZE " + mapSize);
+                    Notify($"Checking {mapName} {padding} <= " + mapSize);
 
-                    var fileSize = new FileInfo(mapFile).Length;
-
-                    Notify(fileSize == map.Size
-                        ? $"Verified {mapName} {padding} <= AUTHENTIC " + mapSize
-                        : $"Mismatch {mapName} {padding} <= INCORRECT " + mapSize + " != " + fileSize
-                    );
+                    if (new FileInfo(mapFile).Length == map.Size)
+                        Notify($"Verified {mapName} {padding} <= " + mapSize);
+                    else
+                        throw new SecurityException($"Map '{mapName}' length mismatches the expected one.");
                 }
                 else
                 {
-                    Notify($"Skipping {mapName} {padding} <= NOT EXIST");
+                    throw new FileNotFoundException($"Map '{mapName}' does not exist in the maps folder.");
                 }
             }
 
