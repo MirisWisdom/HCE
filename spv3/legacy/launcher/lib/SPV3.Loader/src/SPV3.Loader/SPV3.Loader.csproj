@@ -48,6 +48,20 @@
     <Compile Include="ParametersParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\HCE.BalsamV\src\HCE.BalsamV\HCE.BalsamV.csproj">
+      <Project>{02665f11-3cdb-472a-8bf8-951b94f544a5}</Project>
+      <Name>HCE.BalsamV</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\SPV3.Domain\src\SPV3.Domain\SPV3.Domain.csproj">
+      <Project>{df140d8d-f741-424e-b5f7-54efa3ccd796}</Project>
+      <Name>SPV3.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\SPV3.Resume\src\SPV3.Resume\SPV3.Resume.csproj">
+      <Project>{a0a03d8e-5a1c-42d8-80a2-4d7b64999517}</Project>
+      <Name>SPV3.Resume</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,3 +1,22 @@
+/**
+ * Copyright (C) 2019 Emilian Roman
+ * 
+ * This file is part of SPV3.Loader.
+ * 
+ * SPV3.Loader is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * SPV3.Loader is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with SPV3.Loader.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 using System;
 using System.IO;
 using Microsoft.Win32;
@@ -43,15 +62,27 @@ namespace SPV3.Loader
         /// </exception>
         public static Executable Detect()
         {
+            /**
+             * Check for the executable presence in the current directory.
+             */
             var currentDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), Executable.Name);
             if (File.Exists(currentDirectoryPath)) return new Executable(currentDirectoryPath);
 
+            /**
+             * Check for the executable presence in the official paths (64-bit).
+             */
             var fullDefaultPath64 = $@"{DefaultInstall64}\{Executable.Name}";
             if (File.Exists(fullDefaultPath64)) return new Executable(fullDefaultPath64);
 
+            /**
+             * Check for the executable presence in the official paths (32-bit).
+             */
             var fullDefaultPath32 = $@"{DefaultInstall32}\{Executable.Name}";
             if (File.Exists(fullDefaultPath32)) return new Executable(fullDefaultPath32);
 
+            /**
+             * Check for the executable presence in the registry keys (32-bit).
+             */
             using (var view = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
             using (var key = view.OpenSubKey(RegKeyLocation))
             {
@@ -59,6 +90,9 @@ namespace SPV3.Loader
                 if (path != null) return new Executable($@"{path}\{Executable.Name}");
             }
 
+            /**
+             * Check for the executable presence in the registry keys (64-bit).
+             */
             using (var view = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
             using (var key = view.OpenSubKey(RegKeyLocation))
             {

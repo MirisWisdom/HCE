@@ -14,13 +14,13 @@ namespace SPV3.Shaders
         ///     The encoding mechanism is specified in the doc/global-variable.md documentation.
         /// </summary>
         /// <param name="configuration">
-        ///     Configuration instance representing user preferences for post-processing effects.
+        ///    Configuration instance representing user preferences for post-processing effects.
         /// </param>
         /// <returns>
-        ///     Global Variable instance whose Value property represents the encoded Configuration intsance.
+        ///    Global Variable instance whose Value property represents the encoded Configuration intsance.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     One of the Configuration properties' values are invalid.
+        ///    One of the Configuration properties' values are invalid.
         /// </exception>
         public static GlobalVariable Encode(Configuration configuration)
         {

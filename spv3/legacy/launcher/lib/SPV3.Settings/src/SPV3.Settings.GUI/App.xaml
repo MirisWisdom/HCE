@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:SPV3.Settings.GUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
+         
     </Application.Resources>
 </Application>

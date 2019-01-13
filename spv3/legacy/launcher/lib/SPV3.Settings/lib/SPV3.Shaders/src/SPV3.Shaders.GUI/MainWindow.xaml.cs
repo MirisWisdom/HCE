@@ -198,10 +198,10 @@ namespace SPV3.Shaders.GUI
         ///     Visually sets the inbound button as active, and visually deactivates the buttons in the inbound list.
         /// </summary>
         /// <param name="button">
-        ///     Button to visually mark as active.
+        ///    Button to visually mark as active.
         /// </param>
         /// <param name="buttons">
-        ///     Buttons to visually mark as inactive.
+        ///    Buttons to visually mark as inactive.
         /// </param>
         private static void SetBackground(Control button, List<Button> buttons)
         {
@@ -210,7 +210,7 @@ namespace SPV3.Shaders.GUI
         }
 
         /// <summary>
-        ///     Exits the application.
+        /// Exits the application.
         /// </summary>
         private void Close(object sender, RoutedEventArgs e)
         {
