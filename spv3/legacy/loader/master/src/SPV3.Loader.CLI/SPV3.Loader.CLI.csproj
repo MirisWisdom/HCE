@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SPV3.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\ext\SPV3.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -43,10 +46,6 @@
     <Compile Include="StatusOutput.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\SPV3.Domain\src\SPV3.Domain\SPV3.Domain.csproj">
-      <Project>{df140d8d-f741-424e-b5f7-54efa3ccd796}</Project>
-      <Name>SPV3.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SPV3.Loader\SPV3.Loader.csproj">
       <Project>{ddc47180-2a6f-4692-92b4-072b4eff2438}</Project>
       <Name>SPV3.Loader</Name>
