@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="CardType.cs" />
     <Compile Include="ExecutableFactory.cs" />
+    <Compile Include="HceDataException.cs" />
+    <Compile Include="MapDataException.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Executable.cs" />
     <Compile Include="ParametersSerialiser.cs" />

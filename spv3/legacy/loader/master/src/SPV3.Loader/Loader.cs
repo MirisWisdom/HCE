@@ -21,7 +21,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Security;
 using HCE.BalsamV;
 using SPV3.Domain;
 using SPV3.Resume;
@@ -89,7 +88,7 @@ namespace SPV3.Loader
         /// <exception cref="NullReferenceException">
         ///     Maps package not found in the manifest.
         /// </exception>
-        /// <exception cref="SecurityException">
+        /// <exception cref="MapDataException">
         ///     Map length mismatches the expected one.
         /// </exception>
         /// <exception cref="FileNotFoundException">
@@ -140,7 +139,7 @@ namespace SPV3.Loader
                     if (new FileInfo(mapFile).Length == map.Size)
                         Notify($"Verified {mapName} {padding} <= " + mapSize);
                     else
-                        throw new SecurityException($"Map '{mapName}' length mismatches the expected one.");
+                        throw new MapDataException($"Map '{mapName}' length mismatches the expected one.");
                 }
                 else
                 {
@@ -227,7 +226,7 @@ namespace SPV3.Loader
         /// <param name="parameters">
         ///     Parameters for the start-up process.
         /// </param>
-        /// <exception cref="SecurityException">
+        /// <exception cref="HceDataException">
         ///     Executable failed to pass the verification routine.
         /// </exception>
         /// <exception cref="FormatException">
@@ -246,7 +245,7 @@ namespace SPV3.Loader
                 Notify("Verifying Halo executable...");
 
                 if (!executable.Verify())
-                    throw new SecurityException("Executable failed to pass the verification routine.");
+                    throw new HceDataException("Executable failed to pass the verification routine.");
 
                 Notify("Executable verifying passed!");
             }
