@@ -17,7 +17,7 @@
     <controls:MetroWindow.DataContext>
         <gui:Main />
     </controls:MetroWindow.DataContext>
-    <Grid>
+    <Grid Margin="10">
         <Grid Margin="25,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -34,14 +34,15 @@
                 <!-- Menu buttons -->
                 <StackPanel
                     Grid.Column="0"
-                    VerticalAlignment="Bottom">
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,10">
                     <Label Content="SPV3.2"
                            Foreground="White"
                            FontFamily="Segoe UI Light"
                            FontSize="88"
                            Padding="0" />
 
-                    <StackPanel Margin="0,10,0,0">
+                    <StackPanel>
                         <Border>
                             <Button Click="Load" Content="LOAD SPV3.2" />
                         </Border>
@@ -52,16 +53,30 @@
                             <Button Click="Exit" Content="EXIT" />
                         </Border>
                     </StackPanel>
-
                 </StackPanel>
             </Grid>
 
             <!-- Footer -->
-            <TextBlock Grid.Row="1"
-                       HorizontalAlignment="Right"
-                       Foreground="#25FFFFFF"
-                       Padding="0,10,0,0"
-                       Text="SPV3.2 Loader" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           Background="#7FDC143C"
+                           Padding="10"
+                           Text="{Binding ErrorStringData}"
+                           Visibility="{Binding ErrorVisibility}" />
+
+                <TextBlock Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Foreground="#25FFFFFF"
+                           Padding="0,10,0,0"
+                           Text="SPV3.2 Loader" />
+            </Grid>
         </Grid>
     </Grid>
 </controls:MetroWindow>
