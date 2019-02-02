@@ -110,6 +110,12 @@ namespace SPV3.Loader
             if (!System.IO.File.Exists(manifestFile))
                 throw new FileNotFoundException("Manifest binary does not exist in working directory.");
 
+            /**
+             * The maps are retrieved from the manifest binary, which should be present in the working directory along
+             * with the loader. The manifest, conventionally, is installed to the directory. If it's not present, you
+             * must create a manifest binary using the SPV3.Compiler. Alternatively, enable the SkipMapVerification
+             * option in the LoaderConfiguration.
+             */
             IEnumerable<Entry> GetMaps()
             {
                 var manifest = new ManifestRepository(manifestFile).Load();
