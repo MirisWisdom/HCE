@@ -93,6 +93,8 @@ namespace SPV3.Loader
         /// </exception>
         /// <exception cref="FileNotFoundException">
         ///     Map does not exist in the maps folder.
+        ///     - or -
+        ///     Manifest binary does not exist in working directory.
         /// </exception>
         private void VerifyMapLengths()
         {
@@ -102,10 +104,15 @@ namespace SPV3.Loader
             Notify("----------------------------");
             Notify("Initiated maps data check...");
             Notify("----------------------------");
+            
+            var manifestFile = (File) Manifest.Name.Value;
+
+            if (!System.IO.File.Exists(manifestFile))
+                throw new FileNotFoundException("Manifest binary does not exist in working directory.");
 
             IEnumerable<Entry> GetMaps()
             {
-                var manifest = new ManifestRepository((File) Manifest.Name.Value).Load();
+                var manifest = new ManifestRepository(manifestFile).Load();
                 var packages = manifest.Packages;
 
                 foreach (var package in packages)
