@@ -104,11 +104,8 @@ namespace SPV3.Loader
             Notify("----------------------------");
             Notify("Initiated maps data check...");
             Notify("----------------------------");
-            
-            var manifestFile = (File) Manifest.Name.Value;
 
-            if (!System.IO.File.Exists(manifestFile))
-                throw new FileNotFoundException("Manifest binary does not exist in working directory.");
+            var manifestFile = (File) Manifest.Name.Value;
 
             /**
              * The maps are retrieved from the manifest binary, which should be present in the working directory along
