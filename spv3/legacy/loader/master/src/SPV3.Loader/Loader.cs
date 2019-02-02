@@ -97,6 +97,9 @@ namespace SPV3.Loader
         /// </exception>
         private void VerifyMapLengths()
         {
+            if (_configuration.SkipVerification)
+                return;
+
             Notify("----------------------------");
             Notify("Initiated maps data check...");
             Notify("----------------------------");
