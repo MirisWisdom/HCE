@@ -27,7 +27,12 @@ namespace SPV3.Loader
         /// <summary>
         ///     Skips verification of the provided HCE executable.
         /// </summary>
-        public bool SkipVerification { get; set; }
+        public bool SkipHceVerification { get; set; }
+
+        /// <summary>
+        ///     Skips verification of the maps defined in a present manifest.
+        /// </summary>
+        public bool SkipMapVerification { get; set; }
 
         /// <summary>
         ///     Skips campaign progress update routine.

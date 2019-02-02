@@ -97,7 +97,7 @@ namespace SPV3.Loader
         /// </exception>
         private void VerifyMapLengths()
         {
-            if (_configuration.SkipVerification)
+            if (_configuration.SkipMapVerification)
                 return;
 
             Notify("----------------------------");
@@ -241,7 +241,7 @@ namespace SPV3.Loader
             Notify("Initiated game invocation...");
             Notify("----------------------------");
 
-            if (!_configuration.SkipVerification)
+            if (!_configuration.SkipHceVerification)
             {
                 Notify("Verifying Halo executable...");
 
