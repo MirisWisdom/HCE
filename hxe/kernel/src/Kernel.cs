@@ -107,10 +107,10 @@ namespace HXE
           configuration.Mode = Configuration.ConfigurationMode.SPV33;
       }
 
-      Init(configuration.Mode); /* initc.txt declarations */
-      Blam();                   /* blam.sav enhancements  */
-      Open();                   /* opensauce declarations */
-      Exec();                   /* haloce.exe invocation  */
+      Init(); /* initc.txt declarations */
+      Blam(); /* blam.sav enhancements  */
+      Open(); /* opensauce declarations */
+      Exec(); /* haloce.exe invocation  */
 
       Core("CORE.MAIN: Successfully updated the initiation, profile and OS files, and invoked the HCE executable.");
 
@@ -125,10 +125,9 @@ namespace HXE
        * -   SHADER: SPV3 post-processing configurations, including activated shaders & shader intensity levels.
        */
 
-      void Init(Configuration.ConfigurationMode mode = Configuration.ConfigurationMode.HCE)
+      void Init()
       {
         var init = (Initiation) GetFullPath(executable.Debug.Initiation);
-        init.mode = mode;
 
         Resume(); /* spv3 campaign resume with ui.map compatibility */
         Tweaks(); /* hce/spv3 start-up miscellaneous tweaks         */
@@ -169,20 +168,8 @@ namespace HXE
 
             if (!lastprof.Exists())
             {
-              var  profile  = new Profile();
-              bool scaffold = false;
-
-              Core("Lastprof.txt does not Exists.");
-              Core("Calling LastProfile.Generate()...");
-              if (!scaffold)
-              {
-                Debug("Savegames scaffold doesn't exist.");
-              }
-              else
-              {
-                Debug("Savegames scaffold detected.");
-              }
-              NewProfile.Generate(executable.Profile.Path, lastprof, profile, scaffold);
+              Error("Lastprof.txt does not Exist.");
+              lastprof.Save();
             }
 
             lastprof.Load();
@@ -192,7 +179,36 @@ namespace HXE
 
             if (!save.Exists())
             {
-              throw new Exception("Player Profile could not be found.");
+              Error("Player Profile could not be found.");
+              var savegames = Custom.Profiles(executable.Profile.Path);
+              if (!Exists(savegames))
+              {
+                Error("Savegames folder does not exist.");
+                NewProfile.Generate(executable.Profile.Path, lastprof, new Profile(), false);
+              }
+              else
+              {
+                var profiles = new List<string>(GetDirectories(savegames));
+                var validProfiles = new List<string>{ };
+
+                if (profiles.Count == 0)
+                {
+                  Error("No profiles found in savegames folder.");
+                  Core("Generating new profile");
+                  NewProfile.Generate(executable.Profile.Path, lastprof, new Profile(), false);
+                }
+                else
+                {
+                  foreach (string profile in profiles)
+                  {
+                    var dirName = GetDirectoryName(profile);
+                    if (System.IO.File.Exists(Combine(Custom.ProfileDirectory(executable.Profile.Path, dirName) + "blam.sav")))
+                      validProfiles.Add(dirName); // todo: implement better validation
+                  }
+                  save = (Progress) Custom.Progress(executable.Profile.Path, validProfiles[0]); // todo: allow the user to select another profile
+                  lastprof.Profile = validProfiles[0];
+                }
+              }
             }
 
             var campaign = new HXE.Campaign(Paths.Campaign(configuration.Mode));
@@ -201,7 +217,7 @@ namespace HXE
             save.Load(campaign);
 
             init.Progress = save;
-            init.Resume   = campaign.Resume;
+            init.Resume = campaign.Resume;
 
             Core("INIT.RESUME: Campaign checkpoint information has been applied to the initiation file.");
 
@@ -211,7 +227,7 @@ namespace HXE
           catch (Exception e)
           {
             var msg = " -- INIT.RESUME HALTED\n Error:  " + e.ToString() + "\n";
-            var log = (File)Paths.Exception;
+            var log = (File) Paths.Exception;
             log.AppendAllText(msg);
             Error(e.Message + " -- INIT.RESUME HALTED");
           }
@@ -283,7 +299,7 @@ namespace HXE
 
         void Unlock()
         {
-          if (configuration.Mode != Configuration.ConfigurationMode.SPV31)
+          if (configuration.Mode != Configuration.ConfigurationMode.SPV32)
             return;
 
           init.Unlock = true;
@@ -296,7 +312,7 @@ namespace HXE
        * We enhance the player's profile by applying the highest video & audio quality settings, along with forcing the
        * resolution declared in video parameters of the inbound executable.
        *
-       * The enhancements are applied based on the provided configuration, and also the on the success rate of inferring
+       * The enhancements are applied based on the provided configuration and the successful inference
        * the last used profile in the specified profiles directory.
        */
 
@@ -304,46 +320,40 @@ namespace HXE
       {
         Profile blam;
 
-        for (int i = 0; i < 1 ; i++)
+        try
         {
-          try
-          {
-            blam = Profile.Detect(executable.Profile.Path);
+          blam = Profile.Detect(executable.Profile.Path);
              
-            Video();
-            Audio();
-            Input();
+          Video();
+          Audio();
+          Input();
 
-            blam.Save();
+          blam.Save();
 
-            Core("MAIN.BLAM: Profile enhancements have been successfully applied and saved.");
-          }
-          catch (Exception e)
-          {
-            if (i == 0 && (uint)e.HResult == 0x80070002) // FileNotFoundException
-            {
-              var lastprof = (LastProfile)Custom.LastProfile(executable.Profile.Path);
-              var scaffold = lastprof.Exists() && System.IO.File.Exists(Custom.Profile(executable.Profile.Path, lastprof.Profile));
+          Core("MAIN.BLAM: Profile enhancements have been successfully applied and saved.");
+        }
+        catch (FileNotFoundException)
+        {
+          var lastprof = (LastProfile) Custom.LastProfile(executable.Profile.Path);
+          var scaffold = lastprof.Exists() && System.IO.File.Exists(Custom.Profile(executable.Profile.Path, lastprof.Profile));
 
-              if (!lastprof.Exists())
-                Core("Lastprof.txt does not exist.");
+          if (!lastprof.Exists())
+            Core("Lastprof.txt does not exist.");
 
-              if (!scaffold)
-                Debug("Savegames scaffold doesn't exist.");
-              else
-                Debug("Savegames scaffold detected.");
+          if (!scaffold)
+            Debug("Savegames scaffold doesn't exist.");
+          else
+            Debug("Savegames scaffold detected.");
 
-              Core("Calling LastProfile.Generate()...");
-              NewProfile.Generate(executable.Profile.Path, lastprof, new Profile(), scaffold);
-            }
-            else
-            {
-              var msg = " -- MAIN.BLAM HALTED\n Error:  " + e.ToString() + "\n";
-              var log = (File)Paths.Exception;
-              log.AppendAllText(msg);
-              Error(msg);
-            }
-          }
+          Core("Calling LastProfile.Generate()...");
+          NewProfile.Generate(executable.Profile.Path, lastprof, blam = new Profile(), scaffold);
+        }
+        catch (Exception e)
+        {
+          var msg = " -- MAIN.BLAM HALTED\n Error:  " + e.ToString() + "\n";
+          var log = (File)Paths.Exception;
+          log.AppendAllText(msg);
+          Error(msg);
         }
 
         /**
@@ -358,13 +368,10 @@ namespace HXE
         {
           if (!configuration.Video.ResolutionEnabled)
           {
-            if (executable.Video.Width == 0 || executable.Video.Height == 0)
-            {
-              executable.Video.Width  = (ushort) PrimaryScreen.Bounds.Width;
-              executable.Video.Height = (ushort) PrimaryScreen.Bounds.Height;
+            executable.Video.Width  = (ushort) PrimaryScreen.Bounds.Width;
+            executable.Video.Height = (ushort) PrimaryScreen.Bounds.Height;
 
-              Core("BLAM.VIDEO.RESOLUTION: No resolution provided. Applied native resolution to executable.");
-            }
+            Core("BLAM.VIDEO.RESOLUTION: No resolution provided. Applied native resolution to executable.");
 
             if (executable.Video.Width  > (ushort) PrimaryScreen.Bounds.Width ||
                 executable.Video.Height > (ushort) PrimaryScreen.Bounds.Height)
@@ -783,7 +790,6 @@ namespace HXE
       public enum ConfigurationMode
       {
         HCE,   /* tweaks, hce patches & enhancements */
-        SPV31, /* legacy maps unlock, no shaders     */
         SPV32, /* shaders, campaign resume, tweaks   */
         SPV33  /* SPV32, campaign++, deband          */
       }
@@ -867,7 +873,7 @@ namespace HXE
             bw.Write(Video.ResolutionEnabled);
             bw.Write(Video.Uncap);
             bw.Write(Video.Quality);
-            bw.Write(Video.GammaEnabled);
+            bw.Write(Video.GammaOn);
             bw.Write(Video.Gamma);
             bw.Write(Video.Bless);
           }
@@ -965,7 +971,7 @@ namespace HXE
             Video.ResolutionEnabled = br.ReadBoolean();
             Video.Uncap             = br.ReadBoolean();
             Video.Quality           = br.ReadBoolean();
-            Video.GammaEnabled      = br.ReadBoolean();
+            Video.GammaOn           = br.ReadBoolean();
             Video.Gamma             = br.ReadByte();
             Video.Bless             = br.ReadBoolean();
           }
@@ -1029,10 +1035,10 @@ namespace HXE
 
       public class ConfigurationVideo
       {
-        public bool ResolutionEnabled { get; set; } = true;  /* custom resolution */
+        public bool ResolutionEnabled { get; set; } = false; /* custom resolution */
         public bool Uncap             { get; set; } = true;  /* unlock framerate   */
         public bool Quality           { get; set; }          /* set to false by default for optimisation */
-        public bool GammaEnabled      { get; set; } = false; /* enable hce gamma   */
+        public bool GammaOn           { get; set; } = false; /* enable hce gamma   */
         public byte Gamma             { get; set; }          /* game video gamma   */
         public bool Bless             { get; set; } = true;  /* border-less hack   */
       }
