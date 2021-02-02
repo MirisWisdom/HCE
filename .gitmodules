@@ -1,0 +1,3 @@
+[submodule "chimera"]
+	path = chimera
+	url = https://github.com/SnowyMouse/chimera.git
