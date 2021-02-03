@@ -1,3 +1,6 @@
 [submodule "chimera"]
 	path = chimera
 	url = https://github.com/SnowyMouse/chimera.git
+[submodule "halo-ce-patches"]
+	path = halo-ce-patches
+	url = https://github.com/pR0Ps/halo-ce-patches.git
