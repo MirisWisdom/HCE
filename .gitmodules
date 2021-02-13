@@ -4,3 +4,6 @@
 [submodule "ext/halo-ce-patches"]
 	path = ext/halo-ce-patches
 	url = https://source.n2.network/halo-ce-patches/
+[submodule "ext/xidi"]
+	path = ext/xidi
+	url = https://source.n2.network/xidi/
