@@ -2,9 +2,10 @@
 <Update xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Assets>
     <Asset>
-      <URL>https://github.com/HaloSPV3/HCE.DRP/releases/download/HCE.DRP%2Fv1.0.5/DRP-v1.0.5.zip</URL>
-      <Name>DRP.dll</Name>
-      <Size>300544</Size>
+      <URL>https://github.com/HaloSPV3/HCE.DRP/releases/download/HCE.DRP%2Fv1.0.5/haloce_presence-v1.0.5-padded.zip</URL>
+      <Name>haloce_presence.dll</Name>
+      <Path>controls</Path>
+      <Size>302080</Size>
     </Asset>
     <Asset>
       <URL>https://github.com/yumiris/HCE/releases/download/updates/credits.zip</URL>
